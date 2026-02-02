@@ -7,6 +7,7 @@ Uses LangChain with Google Gemini or OpenAI for embeddings and LLM.
 import os
 import time
 from pathlib import Path
+from dataclasses import dataclass
 from typing import Literal
 
 from dotenv import load_dotenv
@@ -18,6 +19,14 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
+
+
+@dataclass
+class AskResult:
+    """Result from asking a question."""
+
+    answer: str
+    source_documents: list
 
 
 class TaxRagEngine:
@@ -156,7 +165,7 @@ class TaxRagEngine:
             embedding_function=self.embeddings,
         )
 
-    def ask(self, question: str, k: int = 4) -> str:
+    def ask(self, question: str, k: int = 4) -> AskResult:
         """
         Ask a question about the ingested documents.
 
@@ -165,7 +174,7 @@ class TaxRagEngine:
             k: Number of relevant documents to retrieve
 
         Returns:
-            Answer string from the LLM
+            AskResult containing answer and source documents
         """
         if self.vectorstore is None:
             self.load_vectorstore()
@@ -195,7 +204,10 @@ Context:
         retrieval_chain = create_retrieval_chain(retriever, question_answer_chain)
 
         response = retrieval_chain.invoke({"input": question})
-        return response["answer"]
+        return AskResult(
+            answer=response["answer"],
+            source_documents=response.get("context", []),
+        )
 
 
 if __name__ == "__main__":
@@ -209,7 +221,8 @@ if __name__ == "__main__":
 
         question = "What is the tax-free threshold for individuals?"
         print(f"\nQuestion: {question}")
-        answer = engine.ask(question)
-        print(f"Answer: {answer}")
+        result = engine.ask(question)
+        print(f"Answer: {result.answer}")
+        print(f"\nSources: {len(result.source_documents)} documents")
     else:
         print(f"PDF not found at {pdf_path}")
