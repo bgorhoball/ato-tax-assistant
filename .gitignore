@@ -1,0 +1,33 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Vector store (large, regenerable)
+chroma_db/
+
+# Data files (PDFs)
+data/*.pdf
