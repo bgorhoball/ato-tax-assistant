@@ -64,15 +64,80 @@ st.caption("Ask questions about Australian tax returns based on official ATO doc
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+def get_confidence_display(scores: list) -> tuple[float, str, str]:
+    """Convert distance scores to confidence display."""
+    if not scores:
+        return 0.0, "N/A", "⚪"
+
+    # Chroma returns distance (lower = better), typically 0-2 for cosine
+    top_score = min(scores)
+    # Convert distance to similarity (0-1 scale)
+    confidence = max(0, min(1, 1 - top_score / 2))
+
+    if confidence >= 0.7:
+        level, indicator = "High", "🟢"
+    elif confidence >= 0.4:
+        level, indicator = "Medium", "🟡"
+    else:
+        level, indicator = "Low", "🔴"
+
+    return confidence, level, indicator
+
+
+def render_confidence_dashboard(scores: list, docs: list):
+    """Render the AI confidence analysis dashboard."""
+    confidence, level, indicator = get_confidence_display(scores)
+
+    st.markdown("### 🤖 AI Confidence Analysis")
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(
+            label="Top Match Similarity",
+            value=f"{confidence:.2f}",
+            help="Similarity score (0-1, higher is better)"
+        )
+    with col2:
+        st.metric(
+            label="Confidence Level",
+            value=f"{level} {indicator}",
+            help="Based on vector similarity threshold"
+        )
+    with col3:
+        st.metric(
+            label="Sources Retrieved",
+            value=len(docs),
+            help="Number of relevant document chunks"
+        )
+
+    # Show top match info
+    if docs and scores:
+        top_idx = scores.index(min(scores))
+        top_doc = docs[top_idx]
+        page = top_doc.metadata.get("page", "N/A")
+        st.caption(
+            f"📍 **Logic:** The vector of your question is most aligned with "
+            f"**Page {page}** (distance: {min(scores):.4f})"
+        )
+
+
 # Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+
+        # Show confidence dashboard for assistant messages
+        if message.get("scores"):
+            with st.expander("🤖 AI Confidence Analysis", expanded=False):
+                render_confidence_dashboard(message["scores"], message.get("sources", []))
+
         if message.get("sources"):
             with st.expander("📄 Source Documents"):
+                scores = message.get("scores", [])
                 for i, doc in enumerate(message["sources"], 1):
                     page = doc.metadata.get("page", "N/A")
-                    st.markdown(f"**Source {i}** (Page {page})")
+                    score_text = f" | Distance: {scores[i-1]:.4f}" if i <= len(scores) else ""
+                    st.markdown(f"**Source {i}** (Page {page}{score_text})")
                     st.text(doc.page_content[:500] + "..." if len(doc.page_content) > 500 else doc.page_content)
                     st.divider()
 
@@ -95,12 +160,18 @@ if prompt := st.chat_input("Ask a question about Australian tax..."):
 
             st.markdown(result.answer)
 
+            # Show confidence dashboard
+            if result.scores:
+                with st.expander("🤖 AI Confidence Analysis", expanded=True):
+                    render_confidence_dashboard(result.scores, result.source_documents)
+
             # Show source documents
             if result.source_documents:
                 with st.expander("📄 Source Documents"):
                     for i, doc in enumerate(result.source_documents, 1):
                         page = doc.metadata.get("page", "N/A")
-                        st.markdown(f"**Source {i}** (Page {page})")
+                        score_text = f" | Distance: {result.scores[i-1]:.4f}" if i <= len(result.scores) else ""
+                        st.markdown(f"**Source {i}** (Page {page}{score_text})")
                         st.text(doc.page_content[:500] + "..." if len(doc.page_content) > 500 else doc.page_content)
                         st.divider()
 
@@ -109,6 +180,7 @@ if prompt := st.chat_input("Ask a question about Australian tax..."):
                 "role": "assistant",
                 "content": result.answer,
                 "sources": result.source_documents,
+                "scores": result.scores,
             })
 
         except FileNotFoundError as e:

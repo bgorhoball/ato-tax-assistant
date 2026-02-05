@@ -27,6 +27,7 @@ class AskResult:
 
     answer: str
     source_documents: list
+    scores: list  # Similarity scores (distance - lower is better)
 
 
 class TaxRagEngine:
@@ -174,14 +175,22 @@ class TaxRagEngine:
             k: Number of relevant documents to retrieve
 
         Returns:
-            AskResult containing answer and source documents
+            AskResult containing answer, source documents, and similarity scores
         """
         if self.vectorstore is None:
             self.load_vectorstore()
 
-        retriever = self.vectorstore.as_retriever(
-            search_type="similarity",
-            search_kwargs={"k": k},
+        # Get documents with similarity scores directly
+        results_with_scores = self.vectorstore.similarity_search_with_score(
+            question, k=k
+        )
+        docs = [doc for doc, _ in results_with_scores]
+        scores = [score for _, score in results_with_scores]
+
+        # Format context from documents
+        context = "\n\n".join(
+            f"[Page {doc.metadata.get('page', 'N/A')}]: {doc.page_content}"
+            for doc in docs
         )
 
         system_prompt = """You are an expert assistant for Australian tax matters.
@@ -200,13 +209,14 @@ Context:
             ]
         )
 
-        question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
-        retrieval_chain = create_retrieval_chain(retriever, question_answer_chain)
+        # Invoke LLM directly with formatted context
+        chain = prompt | self.llm
+        response = chain.invoke({"context": context, "input": question})
 
-        response = retrieval_chain.invoke({"input": question})
         return AskResult(
-            answer=response["answer"],
-            source_documents=response.get("context", []),
+            answer=response.content,
+            source_documents=docs,
+            scores=scores,
         )
 
 
