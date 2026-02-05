@@ -2,6 +2,7 @@
 TaxRagEngine - RAG engine for ATO tax document Q&A.
 
 Uses LangChain with Google Gemini or OpenAI for embeddings and LLM.
+Supports both ChromaDB (local) and Pinecone (cloud) vector stores.
 """
 
 import os
@@ -11,10 +12,7 @@ from dataclasses import dataclass
 from typing import Literal
 
 from dotenv import load_dotenv
-from langchain_classic.chains import create_retrieval_chain
-from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -43,11 +41,12 @@ class TaxRagEngine:
 
         Args:
             model_provider: LLM provider - "google" or "openai"
-            persist_directory: Directory to persist the vector store
+            persist_directory: Directory to persist the local vector store
         """
         self.model_provider = model_provider
         self.persist_directory = persist_directory
         self.vectorstore = None
+        self.vector_store_type = os.getenv("VECTOR_STORE_TYPE", "chroma")
 
         self._validate_environment()
         self._init_llm()
@@ -55,6 +54,7 @@ class TaxRagEngine:
 
     def _validate_environment(self) -> None:
         """Validate required environment variables are set."""
+        # Validate LLM provider
         if self.model_provider == "google":
             if not os.getenv("GOOGLE_API_KEY"):
                 raise ValueError(
@@ -68,6 +68,14 @@ class TaxRagEngine:
                 )
         else:
             raise ValueError(f"Unsupported model provider: {self.model_provider}")
+
+        # Validate Pinecone if using cloud
+        if self.vector_store_type == "pinecone":
+            if not os.getenv("PINECONE_API_KEY"):
+                raise ValueError(
+                    "PINECONE_API_KEY environment variable is required for Pinecone vector store. "
+                    "Get your API key from https://www.pinecone.io"
+                )
 
     def _init_llm(self) -> None:
         """Initialize the LLM based on provider."""
@@ -99,9 +107,49 @@ class TaxRagEngine:
 
             self.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
+    def _init_pinecone(self) -> None:
+        """Initialize Pinecone vector store."""
+        from langchain_pinecone import PineconeVectorStore
+        from pinecone import Pinecone
+
+        api_key = os.getenv("PINECONE_API_KEY")
+        index_name = os.getenv("PINECONE_INDEX_NAME", "ato-tax-assistant")
+
+        pc = Pinecone(api_key=api_key)
+        index = pc.Index(index_name)
+        self.vectorstore = PineconeVectorStore(
+            index=index,
+            embedding=self.embeddings,
+        )
+
+    def _init_chroma(self) -> None:
+        """Initialize ChromaDB vector store from disk."""
+        from langchain_community.vectorstores import Chroma
+
+        if not Path(self.persist_directory).exists():
+            raise FileNotFoundError(
+                f"Vector store not found at {self.persist_directory}. "
+                "Please run ingest_pdf() first."
+            )
+
+        self.vectorstore = Chroma(
+            persist_directory=self.persist_directory,
+            embedding_function=self.embeddings,
+        )
+
+    def load_vectorstore(self) -> None:
+        """Load vector store based on VECTOR_STORE_TYPE environment variable."""
+        if self.vector_store_type == "pinecone":
+            self._init_pinecone()
+        else:
+            self._init_chroma()
+
     def ingest_pdf(self, pdf_path: str, batch_size: int = 50, delay: float = 1.0) -> int:
         """
         Load and ingest a PDF into the vector store.
+
+        For ChromaDB: Creates local persistent store.
+        For Pinecone: Uploads to cloud index.
 
         Args:
             pdf_path: Path to the PDF file
@@ -126,9 +174,22 @@ class TaxRagEngine:
         )
         splits = text_splitter.split_documents(documents)
 
-        # Process in batches to avoid rate limits
         total_chunks = len(splits)
         print(f"Processing {total_chunks} chunks in batches of {batch_size}...")
+        print(f"Vector store type: {self.vector_store_type}")
+
+        if self.vector_store_type == "pinecone":
+            self._ingest_to_pinecone(splits, batch_size, delay)
+        else:
+            self._ingest_to_chroma(splits, batch_size, delay)
+
+        return total_chunks
+
+    def _ingest_to_chroma(self, splits: list, batch_size: int, delay: float) -> None:
+        """Ingest documents to local ChromaDB."""
+        from langchain_community.vectorstores import Chroma
+
+        total_chunks = len(splits)
 
         for i in range(0, total_chunks, batch_size):
             batch = splits[i : i + batch_size]
@@ -137,34 +198,47 @@ class TaxRagEngine:
             print(f"  Batch {batch_num}/{total_batches} ({len(batch)} chunks)...")
 
             if i == 0:
-                # First batch: create the vector store
                 self.vectorstore = Chroma.from_documents(
                     documents=batch,
                     embedding=self.embeddings,
                     persist_directory=self.persist_directory,
                 )
             else:
-                # Subsequent batches: add to existing store
                 self.vectorstore.add_documents(batch)
 
-            # Delay between batches to avoid rate limits (skip after last batch)
             if i + batch_size < total_chunks:
                 time.sleep(delay)
 
-        return total_chunks
+    def _ingest_to_pinecone(self, splits: list, batch_size: int, delay: float) -> None:
+        """Ingest documents to Pinecone cloud."""
+        from langchain_pinecone import PineconeVectorStore
+        from pinecone import Pinecone
 
-    def load_vectorstore(self) -> None:
-        """Load an existing vector store from disk."""
-        if not Path(self.persist_directory).exists():
-            raise FileNotFoundError(
-                f"Vector store not found at {self.persist_directory}. "
-                "Please run ingest_pdf() first."
-            )
+        api_key = os.getenv("PINECONE_API_KEY")
+        index_name = os.getenv("PINECONE_INDEX_NAME", "ato-tax-assistant")
 
-        self.vectorstore = Chroma(
-            persist_directory=self.persist_directory,
-            embedding_function=self.embeddings,
-        )
+        pc = Pinecone(api_key=api_key)
+        index = pc.Index(index_name)
+
+        total_chunks = len(splits)
+
+        for i in range(0, total_chunks, batch_size):
+            batch = splits[i : i + batch_size]
+            batch_num = i // batch_size + 1
+            total_batches = (total_chunks + batch_size - 1) // batch_size
+            print(f"  Batch {batch_num}/{total_batches} ({len(batch)} chunks)...")
+
+            if i == 0:
+                self.vectorstore = PineconeVectorStore.from_documents(
+                    documents=batch,
+                    embedding=self.embeddings,
+                    index_name=index_name,
+                )
+            else:
+                self.vectorstore.add_documents(batch)
+
+            if i + batch_size < total_chunks:
+                time.sleep(delay)
 
     def ask(self, question: str, k: int = 4) -> AskResult:
         """
@@ -219,9 +293,15 @@ Context:
             scores=scores,
         )
 
+    def get_vector_store_type(self) -> str:
+        """Return the current vector store type."""
+        return self.vector_store_type
+
 
 if __name__ == "__main__":
     engine = TaxRagEngine(model_provider="google")
+
+    print(f"Vector store type: {engine.get_vector_store_type()}")
 
     pdf_path = "./data/tax_guide.pdf"
     if Path(pdf_path).exists():
