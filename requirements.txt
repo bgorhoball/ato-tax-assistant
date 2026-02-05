@@ -3,6 +3,8 @@ langchain
 langchain-community
 langchain-openai
 langchain-google-genai
+langchain-pinecone
+pinecone
 chromadb
 pypdf
 python-dotenv

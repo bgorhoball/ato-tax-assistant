@@ -35,13 +35,25 @@ with st.sidebar:
     st.subheader("Status")
     google_key = "✅" if os.getenv("GOOGLE_API_KEY") else "❌"
     openai_key = "✅" if os.getenv("OPENAI_API_KEY") else "❌"
+    pinecone_key = "✅" if os.getenv("PINECONE_API_KEY") else "❌"
     st.text(f"Google API Key: {google_key}")
     st.text(f"OpenAI API Key: {openai_key}")
+    st.text(f"Pinecone API Key: {pinecone_key}")
 
-    # Check vector store
-    chroma_path = Path(__file__).parent.parent / "chroma_db"
-    vectorstore_status = "✅" if chroma_path.exists() else "❌"
-    st.text(f"Vector Store: {vectorstore_status}")
+    # Show vector store type
+    vector_store_type = os.getenv("VECTOR_STORE_TYPE", "chroma")
+    if vector_store_type == "pinecone":
+        store_icon = "☁️"
+        store_name = "Pinecone (Cloud)"
+    else:
+        store_icon = "💾"
+        store_name = "ChromaDB (Local)"
+        # Check if local vector store exists
+        chroma_path = Path(__file__).parent.parent / "chroma_db"
+        if not chroma_path.exists():
+            store_name += " ❌"
+
+    st.text(f"Vector Store: {store_icon} {store_name}")
 
     st.divider()
     st.caption("Built with LangChain + Streamlit")
