@@ -100,7 +100,8 @@ class TaxRagEngine:
             from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
             self.embeddings = GoogleGenerativeAIEmbeddings(
-                model="models/text-embedding-004"
+                model="models/gemini-embedding-001",
+                output_dimensionality=768,  # Match existing Pinecone index
             )
         else:
             from langchain_openai import OpenAIEmbeddings
