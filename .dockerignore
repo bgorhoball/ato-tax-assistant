@@ -1,0 +1,13 @@
+venv/
+.venv/
+.git/
+.github/
+infra/
+data/
+scripts/
+__pycache__/
+*.py[cod]
+.env
+*.md
+.gitignore
+.dockerignore

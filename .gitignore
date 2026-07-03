@@ -26,8 +26,16 @@ dist/
 build/
 *.egg-info/
 
-# Vector store (large, regenerable)
-chroma_db/
+# Vector store: COMMITTED on purpose (13 MB). CI builds the Docker image from
+# the git checkout and bakes chroma_db/ in — see ARCHITECTURE.md.
 
 # Data files (PDFs)
 data/*.pdf
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*
+infra/terraform/terraform.tfvars
+infra/terraform/lambda/*.zip
+infra/terraform/.terraform.lock.hcl
