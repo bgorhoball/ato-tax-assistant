@@ -249,6 +249,8 @@ class TaxRagEngineV2:
         else:
             from langchain_community.vectorstores import Chroma
 
+            self._reset_chroma_collection()
+
             # Chroma.afrom_documents may not be fully async, run in executor
             loop = asyncio.get_event_loop()
             self.vectorstore = await loop.run_in_executor(
@@ -259,6 +261,16 @@ class TaxRagEngineV2:
                     persist_directory=self.persist_directory,
                 ),
             )
+
+    def _reset_chroma_collection(self) -> None:
+        """Drop any existing collections so re-ingestion replaces rather than appends."""
+        import chromadb
+
+        if not Path(self.persist_directory).exists():
+            return
+        client = chromadb.PersistentClient(path=self.persist_directory)
+        for collection in client.list_collections():
+            client.delete_collection(collection.name)
 
     async def aingest_pdf(
         self,
@@ -413,6 +425,7 @@ class TaxRagEngineV2:
         """Sync ingest to ChromaDB."""
         from langchain_community.vectorstores import Chroma
 
+        self._reset_chroma_collection()
         total_chunks = len(splits)
 
         for i in range(0, total_chunks, batch_size):

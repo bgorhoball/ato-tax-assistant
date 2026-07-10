@@ -186,10 +186,21 @@ class TaxRagEngine:
 
         return total_chunks
 
+    def _reset_chroma_collection(self) -> None:
+        """Drop any existing collections so re-ingestion replaces rather than appends."""
+        import chromadb
+
+        if not Path(self.persist_directory).exists():
+            return
+        client = chromadb.PersistentClient(path=self.persist_directory)
+        for collection in client.list_collections():
+            client.delete_collection(collection.name)
+
     def _ingest_to_chroma(self, splits: list, batch_size: int, delay: float) -> None:
         """Ingest documents to local ChromaDB."""
         from langchain_community.vectorstores import Chroma
 
+        self._reset_chroma_collection()
         total_chunks = len(splits)
 
         for i in range(0, total_chunks, batch_size):

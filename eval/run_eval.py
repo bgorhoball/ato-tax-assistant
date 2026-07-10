@@ -34,17 +34,39 @@ sys.path.insert(0, str(_EVAL_DIR))
 sys.path.insert(0, str(_SRC_DIR))
 
 from cases import EVAL_CASES, EvalCase  # noqa: E402
-from metrics import CaseResult, evaluate  # noqa: E402
+from metrics import CaseResult, compute_retrieval_recall, evaluate  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
 # Runner
 # ---------------------------------------------------------------------------
 
-def run_one(engine, case: EvalCase, k: int) -> CaseResult:
+def run_one(engine, case: EvalCase, k: int, retrieval_only: bool = False) -> CaseResult:
     """Call the engine and compute all metrics for a single case."""
     t0 = time.time()
     try:
+        if retrieval_only:
+            # Embedding call only — no LLM generate quota consumed.
+            results_with_scores = engine.vectorstore.similarity_search_with_score(
+                case.question, k=k
+            )
+            elapsed = time.time() - t0
+            retrieved_pages = [
+                doc.metadata.get("page", -1) for doc, _ in results_with_scores
+            ]
+            return CaseResult(
+                case_id=case.id,
+                category=case.category,
+                question=case.question,
+                answer="",
+                retrieved_pages=retrieved_pages,
+                answer_accuracy=None,
+                retrieval_recall=compute_retrieval_recall(retrieved_pages, case),
+                citation_faithfulness=None,
+                hallucination_penalty=None,
+                latency_s=elapsed,
+            )
+
         result = engine.ask(case.question, k=k)
         elapsed = time.time() - t0
         retrieved_pages = [
@@ -77,7 +99,10 @@ def _mean(values: list[float]) -> float | None:
 
 
 def print_case(cr: CaseResult, verbose: bool = False) -> None:
-    verdict = "✓" if (cr.answer_accuracy or 0.0) >= 0.5 else "✗"
+    if cr.answer_accuracy is None:
+        verdict = "·"  # not evaluated (e.g. --retrieval-only)
+    else:
+        verdict = "✓" if cr.answer_accuracy >= 0.5 else "✗"
     if cr.error:
         verdict = "E"
     print(
@@ -205,6 +230,14 @@ def main() -> int:
         help="List cases without calling the engine.",
     )
     parser.add_argument(
+        "--retrieval-only",
+        action="store_true",
+        help=(
+            "Skip the LLM and compute retrieval recall only. Uses embedding "
+            "quota, not the 20/day gemini-2.5-flash generate quota."
+        ),
+    )
+    parser.add_argument(
         "--k",
         type=int,
         default=4,
@@ -238,7 +271,8 @@ def main() -> int:
     run_cases = [c for c in cases if not c.skip_reason]
 
     print(f"ato-tax-assistant RAG Eval  |  {len(cases)} total, {len(run_cases)} to run, {len(skipped)} skipped")
-    print(f"k={args.k}  pass_threshold={args.pass_threshold}  dry_run={args.dry_run}\n")
+    mode = "retrieval-only" if args.retrieval_only else "full"
+    print(f"k={args.k}  pass_threshold={args.pass_threshold}  mode={mode}  dry_run={args.dry_run}\n")
 
     if args.dry_run:
         for c in cases:
@@ -274,7 +308,7 @@ def main() -> int:
     results: list[CaseResult] = []
     for i, case in enumerate(run_cases, 1):
         print(f"({i}/{len(run_cases)}) {case.id} …", end="", flush=True)
-        cr = run_one(engine, case, k=args.k)
+        cr = run_one(engine, case, k=args.k, retrieval_only=args.retrieval_only)
         print(" done")
         print_case(cr, verbose=args.verbose)
         results.append(cr)

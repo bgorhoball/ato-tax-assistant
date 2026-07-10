@@ -1,0 +1,793 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 43,
+    "run_cases": 38,
+    "skipped_cases": 5
+  },
+  "skipped": [
+    {
+      "id": "SKIP-01",
+      "skip_reason": "LAYER_3: Enforced grounding with deterministic verbatim citation not implemented. Target architecture returns the source sentence alongside the answer; current engine only passes page number in context."
+    },
+    {
+      "id": "SKIP-02",
+      "skip_reason": "NOT_IMPLEMENTED: Multi-turn conversation with engine-side context retention. Streamlit renders chat history in the UI but does not pass prior turns back to the LLM. The engine has no memory between ask() calls."
+    },
+    {
+      "id": "SKIP-03",
+      "skip_reason": "LAYER_5: PII detection and masking not implemented. A production system must detect TFN/ABN patterns in user input, refuse to process them, and alert the user \u2014 this is Layer 5 of the project roadmap."
+    },
+    {
+      "id": "SKIP-04",
+      "skip_reason": "NOT_IMPLEMENTED: TaxRagEngineV2.aask() exists but the Streamlit UI still calls the sync ask() path. No latency benchmarking harness built yet. Add once aask() is wired into the UI."
+    },
+    {
+      "id": "SKIP-05",
+      "skip_reason": "PROD_INFRA: Bedrock backend not yet deployed. ECS Fargate Spot + Bedrock task role is designed in infra/terraform/ but terraform apply has not been run. Re-run the full eval suite against Bedrock once prod is live to compare accuracy vs the Gemini dev baseline."
+    }
+  ],
+  "results": [
+    {
+      "id": "EASY-01",
+      "category": "easy",
+      "question": "What does the A2 label on the individual tax return relate to?",
+      "answer": "",
+      "retrieved_pages": [
+        90,
+        51,
+        52,
+        2
+      ],
+      "latency_s": 0.645,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-02",
+      "category": "easy",
+      "question": "What information must I write at label N when completing the A2 part-year tax-free threshold section?",
+      "answer": "",
+      "retrieved_pages": [
+        52,
+        66,
+        9,
+        10
+      ],
+      "latency_s": 0.547,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-03",
+      "category": "easy",
+      "question": "Why does the ATO need information about whether I am an Australian resident for tax purposes?",
+      "answer": "",
+      "retrieved_pages": [
+        9,
+        6,
+        9,
+        7
+      ],
+      "latency_s": 0.42,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-04",
+      "category": "easy",
+      "question": "Which item on the individual tax return is used to report salary or wages?",
+      "answer": "",
+      "retrieved_pages": [
+        10,
+        85,
+        59,
+        85
+      ],
+      "latency_s": 0.379,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-05",
+      "category": "easy",
+      "question": "Where on the individual tax return should allowances, earnings, tips, and directors fees be declared?",
+      "answer": "",
+      "retrieved_pages": [
+        11,
+        11,
+        10,
+        67
+      ],
+      "latency_s": 0.418,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-06",
+      "category": "easy",
+      "question": "Which item covers Employment Termination Payments on the tax return?",
+      "answer": "",
+      "retrieved_pages": [
+        13,
+        13,
+        13,
+        85
+      ],
+      "latency_s": 0.407,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-07",
+      "category": "easy",
+      "question": "What type of income is reported at item 10 of the individual tax return?",
+      "answer": "",
+      "retrieved_pages": [
+        11,
+        19,
+        2,
+        86
+      ],
+      "latency_s": 0.44,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-08",
+      "category": "easy",
+      "question": "Which item on the tax return is used to declare dividend income?",
+      "answer": "",
+      "retrieved_pages": [
+        20,
+        20,
+        86,
+        20
+      ],
+      "latency_s": 0.411,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-09",
+      "category": "easy",
+      "question": "Where should an individual report their share of income from a partnership or trust on the tax return?",
+      "answer": "",
+      "retrieved_pages": [
+        56,
+        67,
+        4,
+        55
+      ],
+      "latency_s": 0.416,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-10",
+      "category": "easy",
+      "question": "What is the D9 deduction on the individual tax return used for?",
+      "answer": "",
+      "retrieved_pages": [
+        32,
+        31,
+        2,
+        4
+      ],
+      "latency_s": 0.395,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-01",
+      "category": "medium",
+      "question": "What are the two methods available for calculating work-related car expense deductions under item D1?",
+      "answer": "",
+      "retrieved_pages": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "latency_s": 0.385,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-02",
+      "category": "medium",
+      "question": "What conditions must be satisfied to claim a deduction for self-education expenses at D4?",
+      "answer": "",
+      "retrieved_pages": [
+        28,
+        29,
+        28,
+        28
+      ],
+      "latency_s": 0.434,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-03",
+      "category": "medium",
+      "question": "What are the requirements for a gift or donation to be claimable as a tax deduction at D9?",
+      "answer": "",
+      "retrieved_pages": [
+        32,
+        32,
+        2,
+        32
+      ],
+      "latency_s": 0.408,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-04",
+      "category": "medium",
+      "question": "How is a net capital gain calculated for inclusion in the individual tax return at item 17?",
+      "answer": "",
+      "retrieved_pages": [
+        51,
+        62,
+        69,
+        12
+      ],
+      "latency_s": 0.41,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-05",
+      "category": "medium",
+      "question": "What is the A1 adjustment for total net investment loss and why must it be completed?",
+      "answer": "",
+      "retrieved_pages": [
+        62,
+        51,
+        57,
+        22
+      ],
+      "latency_s": 0.392,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-06",
+      "category": "medium",
+      "question": "What income is captured at item 21 for total reportable fringe benefits amounts?",
+      "answer": "",
+      "retrieved_pages": [
+        59,
+        91,
+        92,
+        68
+      ],
+      "latency_s": 0.385,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-07",
+      "category": "medium",
+      "question": "Where and how should foreign source income be reported on an individual tax return?",
+      "answer": "",
+      "retrieved_pages": [
+        61,
+        10,
+        22,
+        4
+      ],
+      "latency_s": 0.383,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-08",
+      "category": "medium",
+      "question": "Under what conditions can an individual claim personal superannuation contributions as a tax deduction at D12?",
+      "answer": "",
+      "retrieved_pages": [
+        53,
+        4,
+        69,
+        22
+      ],
+      "latency_s": 0.379,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-09",
+      "category": "medium",
+      "question": "What is the purpose of the T5 item relating to private health insurance policy details?",
+      "answer": "",
+      "retrieved_pages": [
+        48,
+        48,
+        50,
+        49
+      ],
+      "latency_s": 0.399,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-10",
+      "category": "medium",
+      "question": "What income amounts are counted toward the Medicare levy surcharge income threshold?",
+      "answer": "",
+      "retrieved_pages": [
+        42,
+        47,
+        46,
+        45
+      ],
+      "latency_s": 0.424,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-11",
+      "category": "medium",
+      "question": "How is the CGT discount applied differently to assets held for more than 12 months versus those held for less?",
+      "answer": "",
+      "retrieved_pages": [
+        21,
+        21,
+        24,
+        22
+      ],
+      "latency_s": 0.456,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-12",
+      "category": "medium",
+      "question": "What types of expenses qualify for the D10 deduction for the cost of managing tax affairs?",
+      "answer": "",
+      "retrieved_pages": [
+        33,
+        33,
+        2,
+        31
+      ],
+      "latency_s": 0.367,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-01",
+      "category": "hard",
+      "question": "A person became an Australian tax resident in October 2023 and remained resident through 30 June 2024. How many months should they write at label N for the A2 part-year tax-free threshold?",
+      "answer": "",
+      "retrieved_pages": [
+        52,
+        52,
+        9,
+        70
+      ],
+      "latency_s": 0.412,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-02",
+      "category": "hard",
+      "question": "What is the key distinction between personal services income at item 14 and business income at item 15, and why does it matter for deduction entitlements?",
+      "answer": "",
+      "retrieved_pages": [
+        51,
+        54,
+        4,
+        57
+      ],
+      "latency_s": 0.372,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-03",
+      "category": "hard",
+      "question": "How are prior-year carried-forward capital losses treated when calculating the net capital gain at item 17?",
+      "answer": "",
+      "retrieved_pages": [
+        62,
+        35,
+        62,
+        87
+      ],
+      "latency_s": 0.429,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-04",
+      "category": "hard",
+      "question": "Can an individual claim a deduction for interest on money borrowed to purchase dividend-paying shares, and if so, under which item?",
+      "answer": "",
+      "retrieved_pages": [
+        32,
+        32,
+        62,
+        31
+      ],
+      "latency_s": 0.423,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-05",
+      "category": "hard",
+      "question": "What is attributed personal services income at item 9, and how does the ATO treat it differently from salary income?",
+      "answer": "",
+      "retrieved_pages": [
+        18,
+        18,
+        11,
+        68
+      ],
+      "latency_s": 0.419,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-06",
+      "category": "hard",
+      "question": "Under what circumstances must an individual complete the seniors and pensioners tax offset at item T7?",
+      "answer": "",
+      "retrieved_pages": [
+        36,
+        72,
+        39,
+        37
+      ],
+      "latency_s": 0.441,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-07",
+      "category": "hard",
+      "question": "How does the A1 net investment loss add-back affect the income figure used when assessing eligibility for the private health insurance Medicare levy surcharge?",
+      "answer": "",
+      "retrieved_pages": [
+        2,
+        90,
+        45,
+        69
+      ],
+      "latency_s": 0.404,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-08",
+      "category": "hard",
+      "question": "If an individual uses their car for both work and private purposes, what proportion of car expenses can be claimed under D1, and which method determines that proportion?",
+      "answer": "",
+      "retrieved_pages": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "latency_s": 0.357,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-01",
+      "category": "hallucination",
+      "question": "What is the exact tax-free threshold dollar amount for Australian residents in the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [
+        9,
+        52,
+        7,
+        42
+      ],
+      "latency_s": 0.408,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-02",
+      "category": "hallucination",
+      "question": "What is the Medicare levy rate expressed as a percentage of taxable income?",
+      "answer": "",
+      "retrieved_pages": [
+        42,
+        41,
+        41,
+        46
+      ],
+      "latency_s": 0.408,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-03",
+      "category": "hallucination",
+      "question": "What is the company tax rate for small businesses with an aggregated turnover below $50 million?",
+      "answer": "",
+      "retrieved_pages": [
+        1,
+        24,
+        51,
+        31
+      ],
+      "latency_s": 0.386,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-04",
+      "category": "hallucination",
+      "question": "What superannuation guarantee percentage must employers pay for the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [
+        53,
+        53,
+        53,
+        16
+      ],
+      "latency_s": 0.375,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-05",
+      "category": "hallucination",
+      "question": "Who is currently the Commissioner of Taxation at the ATO?",
+      "answer": "",
+      "retrieved_pages": [
+        1,
+        1,
+        80,
+        5
+      ],
+      "latency_s": 0.423,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-06",
+      "category": "hallucination",
+      "question": "What penalty does the ATO impose for late lodgement of an individual tax return, and how is it calculated?",
+      "answer": "",
+      "retrieved_pages": [
+        79,
+        79,
+        1,
+        79
+      ],
+      "latency_s": 0.388,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-07",
+      "category": "hallucination",
+      "question": "What is the GST rate in Australia and how does it apply to deductible business expenses?",
+      "answer": "",
+      "retrieved_pages": [
+        24,
+        24,
+        24,
+        30
+      ],
+      "latency_s": 0.401,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-08",
+      "category": "hallucination",
+      "question": "What is the concessional superannuation contribution cap for the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [
+        53,
+        53,
+        7,
+        69
+      ],
+      "latency_s": 0.441,
+      "metrics": {
+        "answer_accuracy": null,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    }
+  ]
+}

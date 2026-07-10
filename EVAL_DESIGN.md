@@ -47,6 +47,10 @@ python eval/run_eval.py --k 6
 # Preview case list without calling the engine
 python eval/run_eval.py --dry-run
 
+# Retrieval recall only — no LLM calls, so it doesn't touch the
+# 20-requests/day gemini-2.5-flash generate quota (uses embed quota, 100/min)
+python eval/run_eval.py --retrieval-only
+
 # Save results for tracking over time
 python eval/run_eval.py --output eval/results/$(date +%Y%m%d).json
 
@@ -205,29 +209,33 @@ immediately enters the run suite on the next eval pass.
 The first full run (`eval/results/2026-07-10-gemini-baseline.json`) surfaced
 three real defects in the app — before any manual testing had noticed them:
 
-1. **Embedding model mismatch (critical).** The chroma_db store was ingested
-   with `text-embedding-004` (see TEST_SUMMARY.md, Feb 2026), but
-   `rag_engine.py` was later switched to `gemini-embedding-001` for queries.
-   Both output 768 dims, so nothing errors — but cosine similarity between a
-   stored vector and a fresh embedding of the *same text* is **−0.007**.
-   Retrieval is effectively random (the A2 question retrieves Medicare-levy
-   pages). Fix: delete `chroma_db/` and re-ingest with the current embedding
-   model. Retrieval recall was 0.000 across all verified cases because of this.
+1. **Embedding model mismatch (critical) — FIXED on this branch.** The
+   chroma_db store was ingested with `text-embedding-004` (see
+   TEST_SUMMARY.md, Feb 2026), but `rag_engine.py` was later switched to
+   `gemini-embedding-001` for queries. Both output 768 dims, so nothing
+   errors — but cosine similarity between a stored vector and a fresh
+   embedding of the *same text* was **−0.007**. Retrieval was effectively
+   random (the A2 question retrieved Medicare-levy pages); retrieval recall
+   was 0.000 across all verified cases because of this.
+   Fix applied 2026-07-10: chroma_db re-ingested with `gemini-embedding-001`.
 
-2. **Triple ingestion.** The store holds 867 chunks = 3 × 289. Each chunk
-   appears three times, so top-4 retrieval often returns the same (wrong)
-   chunk multiple times. The re-ingest that fixes #1 also fixes this — but
-   `ingest_pdf()` should additionally guard against appending to an existing
-   collection.
+2. **Triple ingestion — FIXED on this branch.** The store held 867 chunks =
+   3 × 289; top-4 retrieval often returned the same (wrong) chunk multiple
+   times. Both engines now call `_reset_chroma_collection()` before
+   ingesting, so re-ingestion replaces rather than appends.
 
-3. **Free-tier daily quota.** `gemini-2.5-flash` free tier allows only
-   **20 generate requests/day**, so the 38-case suite cannot complete in one
-   day: 17 cases errored with 429 RESOURCE_EXHAUSTED. Options:
-   run per-category across days (`--category easy` ≈ 10 requests), switch the
-   eval to a higher-quota model, or use a paid key for eval runs.
+3. **Free-tier quotas (constraint, not a bug).**
+   - `gemini-2.5-flash` generate: **20 requests/day** — the 38-case suite
+     cannot complete in one day (17 cases hit 429). Run per-category across
+     days (`--category easy` ≈ 10 requests), use `--retrieval-only`
+     (embedding calls only) for retrieval regression checks, or use a paid key.
+   - `gemini-embedding-001` embed: **100 requests/min**, and each chunk is
+     one request — ingestion needs ≥60s between 50-chunk batches
+     (`ingest_pdf(..., delay=60)`).
 
-Because of #1, the baseline JSON records the *broken* state — keep it as the
-"before" snapshot and record a new baseline after re-ingestion.
+The baseline JSON (`2026-07-10-gemini-baseline.json`) records the *broken*
+pre-fix state — keep it as the "before" snapshot. Record a new full baseline
+after the fix (quota permitting).
 
 ---
 
