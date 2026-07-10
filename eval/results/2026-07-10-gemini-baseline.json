@@ -1,0 +1,708 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 43,
+    "run_cases": 38,
+    "skipped_cases": 5
+  },
+  "skipped": [
+    {
+      "id": "SKIP-01",
+      "skip_reason": "LAYER_3: Enforced grounding with deterministic verbatim citation not implemented. Target architecture returns the source sentence alongside the answer; current engine only passes page number in context."
+    },
+    {
+      "id": "SKIP-02",
+      "skip_reason": "NOT_IMPLEMENTED: Multi-turn conversation with engine-side context retention. Streamlit renders chat history in the UI but does not pass prior turns back to the LLM. The engine has no memory between ask() calls."
+    },
+    {
+      "id": "SKIP-03",
+      "skip_reason": "LAYER_5: PII detection and masking not implemented. A production system must detect TFN/ABN patterns in user input, refuse to process them, and alert the user \u2014 this is Layer 5 of the project roadmap."
+    },
+    {
+      "id": "SKIP-04",
+      "skip_reason": "NOT_IMPLEMENTED: TaxRagEngineV2.aask() exists but the Streamlit UI still calls the sync ask() path. No latency benchmarking harness built yet. Add once aask() is wired into the UI."
+    },
+    {
+      "id": "SKIP-05",
+      "skip_reason": "PROD_INFRA: Bedrock backend not yet deployed. ECS Fargate Spot + Bedrock task role is designed in infra/terraform/ but terraform apply has not been run. Re-run the full eval suite against Bedrock once prod is live to compare accuracy vs the Gemini dev baseline."
+    }
+  ],
+  "results": [
+    {
+      "id": "EASY-01",
+      "category": "easy",
+      "question": "What does the A2 label on the individual tax return relate to?",
+      "answer": "Based on the provided context, there is no information about what the \"A2 label\" on the individual tax return relates to. The context mentions \"M1 Medicare levy reduction or exemption\" and \"Part A \u2013 Medicare levy reduction\" (page 41), and \"Tax offsets\" and \"TOTAL TAX OFFSETS \u2013 label U\" (page 40), but not an \"A2 label.\"",
+      "retrieved_pages": [
+        41,
+        41,
+        41,
+        40
+      ],
+      "latency_s": 3.38,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": 0.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-02",
+      "category": "easy",
+      "question": "What information must I write at label N when completing the A2 part-year tax-free threshold section?",
+      "answer": "I am sorry, but the provided context does not contain any information about \"label N\" or the \"A2 part-year tax-free threshold section.\" The context focuses exclusively on the Medicare levy, its reduction, and exemption criteria (Page 41).",
+      "retrieved_pages": [
+        41,
+        41,
+        41,
+        41
+      ],
+      "latency_s": 2.479,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": 0.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-03",
+      "category": "easy",
+      "question": "Why does the ATO need information about whether I am an Australian resident for tax purposes?",
+      "answer": "Based on the provided context, the information does not explain why the ATO needs information about whether you are an Australian resident for tax purposes. The context focuses on how to complete the tax offsets section of the tax return and refers to the supplementary tax return instructions (Page 40).",
+      "retrieved_pages": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "latency_s": 2.884,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": 0.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-04",
+      "category": "easy",
+      "question": "Which item on the individual tax return is used to report salary or wages?",
+      "answer": "Based on the provided context, there is no information about which item on the individual tax return is used to report salary or wages. The context discusses exempt payments and Medicare levy reduction or exemption (Pages 41, 76).",
+      "retrieved_pages": [
+        76,
+        76,
+        76,
+        41
+      ],
+      "latency_s": 2.207,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-05",
+      "category": "easy",
+      "question": "Where on the individual tax return should allowances, earnings, tips, and directors fees be declared?",
+      "answer": "Based on the provided context, I cannot answer where on the individual tax return allowances, earnings, tips, and directors fees should be declared.\n\nThe context provided lists various **exempt** payments, such as:\n*   Disaster Recovery Allowance for special category visa holders (Page 76)\n*   Utilities allowance (Page 76)\n*   Veterans supplement (Page 76)\n*   Certain pay and allowances for Australian Defence Force personnel (Page 76)\n*   Energy supplement (Page 76)\n*   Family tax benefit (Page 76)\n*   Household Assistance Package payments (Page 76)\n*   Loss of earnings allowance (Page 76)\n*   Mobility allowance (Page 76)\n\nIt does not provide information on where to declare taxable allowances, earnings, tips, or directors fees on an individual tax return.",
+      "retrieved_pages": [
+        76,
+        76,
+        76,
+        76
+      ],
+      "latency_s": 3.16,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-06",
+      "category": "easy",
+      "question": "Which item covers Employment Termination Payments on the tax return?",
+      "answer": "Based on the provided context, the item covering Employment Termination Payments on the tax return is not mentioned. The context discusses Australian superannuation income streams (Question 7) and taxable Australian superannuation lump sum payments (Question 8), but not Employment Termination Payments (Page 15).",
+      "retrieved_pages": [
+        76,
+        76,
+        76,
+        15
+      ],
+      "latency_s": 4.318,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-07",
+      "category": "easy",
+      "question": "What type of income is reported at item 10 of the individual tax return?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 36.066,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 15.125605043s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '15s'}]}}"
+    },
+    {
+      "id": "EASY-08",
+      "category": "easy",
+      "question": "Which item on the tax return is used to declare dividend income?",
+      "answer": "Based on the provided context, there is no information about which item on the tax return is used to declare dividend income. The context discusses the Medicare levy surcharge (M2) and certain exempt Australian Defence Force and United Nations payments.",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        76
+      ],
+      "latency_s": 11.954,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-09",
+      "category": "easy",
+      "question": "Where should an individual report their share of income from a partnership or trust on the tax return?",
+      "answer": "Based on the provided context, there is no information about where an individual should report their share of income from a partnership or trust on their tax return. The context primarily lists various exempt payments and allowances (Page 76).",
+      "retrieved_pages": [
+        76,
+        76,
+        76,
+        76
+      ],
+      "latency_s": 3.562,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-10",
+      "category": "easy",
+      "question": "What is the D9 deduction on the individual tax return used for?",
+      "answer": "I am sorry, but the provided context does not contain any information about a \"D9 deduction\" on the individual tax return. Therefore, I cannot tell you what it is used for based on the given text.",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        76
+      ],
+      "latency_s": 2.473,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-01",
+      "category": "medium",
+      "question": "What are the two methods available for calculating work-related car expense deductions under item D1?",
+      "answer": "Based on the provided context, there is no information about the methods available for calculating work-related car expense deductions under item D1. The context discusses defined benefit income streams (pages 15-16) and various government allowances and subsidies (page 75).",
+      "retrieved_pages": [
+        16,
+        16,
+        16,
+        75
+      ],
+      "latency_s": 2.385,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-02",
+      "category": "medium",
+      "question": "What conditions must be satisfied to claim a deduction for self-education expenses at D4?",
+      "answer": "Based on the provided context, there is no information about the conditions that must be satisfied to claim a deduction for self-education expenses at D4. The context discusses the Medicare levy surcharge (M2) and tax offsets (T1, T2, T3).",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        40
+      ],
+      "latency_s": 2.202,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-03",
+      "category": "medium",
+      "question": "What are the requirements for a gift or donation to be claimable as a tax deduction at D9?",
+      "answer": "Based on the provided context, there is no information regarding the requirements for a gift or donation to be claimable as a tax deduction at D9. The context discusses the Medicare levy surcharge (M2) and superannuation lump sums (question 8).",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        17
+      ],
+      "latency_s": 2.386,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-04",
+      "category": "medium",
+      "question": "How is a net capital gain calculated for inclusion in the individual tax return at item 17?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 34.723,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 15.439127821s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '15s'}]}}"
+    },
+    {
+      "id": "MEDIUM-05",
+      "category": "medium",
+      "question": "What is the A1 adjustment for total net investment loss and why must it be completed?",
+      "answer": "Based on the provided context, there is no information about an \"A1 adjustment for total net investment loss\" or why it must be completed.\n\nThe context discusses the calculation of the \"assessable amount from a capped defined benefit income stream\" which is to be written at \"question 7 \u2013 label M\" (Page 16, 85). It also lists various labels for different components of income streams (Page 85).",
+      "retrieved_pages": [
+        16,
+        16,
+        16,
+        85
+      ],
+      "latency_s": 11.214,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-06",
+      "category": "medium",
+      "question": "What income is captured at item 21 for total reportable fringe benefits amounts?",
+      "answer": "Based on the provided context, there is no information about \"item 21 for total reportable fringe benefits amounts.\" The context discusses Australian superannuation income streams (question 7) and Australian superannuation lump sum payments (question 8).",
+      "retrieved_pages": [
+        15,
+        15,
+        15,
+        17
+      ],
+      "latency_s": 2.481,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-07",
+      "category": "medium",
+      "question": "Where and how should foreign source income be reported on an individual tax return?",
+      "answer": "I am sorry, but the provided context does not contain information about where and how foreign source income should be reported on an individual tax return. The context discusses gifts or donations (Page 32) and specific exempt Australian Government and Australian Defence Force payments (Page 76).",
+      "retrieved_pages": [
+        32,
+        32,
+        32,
+        76
+      ],
+      "latency_s": 3.726,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-08",
+      "category": "medium",
+      "question": "Under what conditions can an individual claim personal superannuation contributions as a tax deduction at D12?",
+      "answer": "Based on the provided context, there is no information about the conditions under which an individual can claim personal superannuation contributions as a tax deduction at D12. The context discusses Medicare levy reduction/exemption (M1, page 41) and Medicare levy surcharge (M2, page 45).",
+      "retrieved_pages": [
+        41,
+        41,
+        41,
+        45
+      ],
+      "latency_s": 2.216,
+      "metrics": {
+        "answer_accuracy": 0.333,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-09",
+      "category": "medium",
+      "question": "What is the purpose of the T5 item relating to private health insurance policy details?",
+      "answer": "Based on the provided context, there is no information about a \"T5 item relating to private health insurance policy details.\" The context discusses topics such as effective life determination for depreciating assets, self-education deductions, and work-related expenses (including tools, equipment, and COVID-19 tests).",
+      "retrieved_pages": [
+        5,
+        5,
+        5,
+        30
+      ],
+      "latency_s": 2.373,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-10",
+      "category": "medium",
+      "question": "What income amounts are counted toward the Medicare levy surcharge income threshold?",
+      "answer": "Based on the provided context, there is no information about the Medicare levy surcharge income threshold or what income amounts are counted towards it. The context discusses the Medicare levy reduction and exemption, which are based on taxable income, spouse's taxable income, and the number of dependent children (Page 41).",
+      "retrieved_pages": [
+        41,
+        41,
+        41,
+        43
+      ],
+      "latency_s": 2.683,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-11",
+      "category": "medium",
+      "question": "How is the CGT discount applied differently to assets held for more than 12 months versus those held for less?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.219,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 15.519245441s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '15s'}]}}"
+    },
+    {
+      "id": "MEDIUM-12",
+      "category": "medium",
+      "question": "What types of expenses qualify for the D10 deduction for the cost of managing tax affairs?",
+      "answer": "Based on the provided context, there is no information regarding the D10 deduction for the cost of managing tax affairs or what types of expenses qualify for it. The context primarily discusses the Medicare levy surcharge (M2) and health insurance claim codes (C and D) related to health insurers (Page 45, Page 50).",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        50
+      ],
+      "latency_s": 12.139,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-01",
+      "category": "hard",
+      "question": "A person became an Australian tax resident in October 2023 and remained resident through 30 June 2024. How many months should they write at label N for the A2 part-year tax-free threshold?",
+      "answer": "I cannot answer your question based on the provided context. The context discusses the Medicare levy and Medicare levy surcharge (M1 and M2) but does not contain any information about \"label N for the A2 part-year tax-free threshold\" or how to calculate the number of months for it.",
+      "retrieved_pages": [
+        45,
+        45,
+        45,
+        41
+      ],
+      "latency_s": 2.71,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": 0.0,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-02",
+      "category": "hard",
+      "question": "What is the key distinction between personal services income at item 14 and business income at item 15, and why does it matter for deduction entitlements?",
+      "answer": "Based on the provided context, there is no information regarding the distinction between personal services income at item 14 and business income at item 15, nor why it matters for deduction entitlements. The context primarily lists various exempt payments and allowances.",
+      "retrieved_pages": [
+        76,
+        76,
+        76,
+        75
+      ],
+      "latency_s": 2.675,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-03",
+      "category": "hard",
+      "question": "How are prior-year carried-forward capital losses treated when calculating the net capital gain at item 17?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.595,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 22.407718992s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '22s'}]}}"
+    },
+    {
+      "id": "HARD-04",
+      "category": "hard",
+      "question": "Can an individual claim a deduction for interest on money borrowed to purchase dividend-paying shares, and if so, under which item?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.719,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 46.68048651s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '46s'}]}}"
+    },
+    {
+      "id": "HARD-05",
+      "category": "hard",
+      "question": "What is attributed personal services income at item 9, and how does the ATO treat it differently from salary income?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.397,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 11.290192976s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}"
+    },
+    {
+      "id": "HARD-06",
+      "category": "hard",
+      "question": "Under what circumstances must an individual complete the seniors and pensioners tax offset at item T7?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.354,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 35.930554904s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '35s'}]}}"
+    },
+    {
+      "id": "HARD-07",
+      "category": "hard",
+      "question": "How does the A1 net investment loss add-back affect the income figure used when assessing eligibility for the private health insurance Medicare levy surcharge?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.373,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 559.122265ms.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]}}"
+    },
+    {
+      "id": "HARD-08",
+      "category": "hard",
+      "question": "If an individual uses their car for both work and private purposes, what proportion of car expenses can be claimed under D1, and which method determines that proportion?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.902,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 24.655178688s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '24s'}]}}"
+    },
+    {
+      "id": "HALL-01",
+      "category": "hallucination",
+      "question": "What is the exact tax-free threshold dollar amount for Australian residents in the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.379,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": 1.0
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 49.275196244s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '49s'}]}}"
+    },
+    {
+      "id": "HALL-02",
+      "category": "hallucination",
+      "question": "What is the Medicare levy rate expressed as a percentage of taxable income?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.824,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": 1.0
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 13.456802149s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '13s'}]}}"
+    },
+    {
+      "id": "HALL-03",
+      "category": "hallucination",
+      "question": "What is the company tax rate for small businesses with an aggregated turnover below $50 million?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 34.827,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 38.626458717s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '38s'}]}}"
+    },
+    {
+      "id": "HALL-04",
+      "category": "hallucination",
+      "question": "What superannuation guarantee percentage must employers pay for the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 36.626,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": 1.0
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 2.0010079s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '2s'}]}}"
+    },
+    {
+      "id": "HALL-05",
+      "category": "hallucination",
+      "question": "Who is currently the Commissioner of Taxation at the ATO?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 36.086,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 25.911777435s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}"
+    },
+    {
+      "id": "HALL-06",
+      "category": "hallucination",
+      "question": "What penalty does the ATO impose for late lodgement of an individual tax return, and how is it calculated?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.008,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 50.907447999s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '50s'}]}}"
+    },
+    {
+      "id": "HALL-07",
+      "category": "hallucination",
+      "question": "What is the GST rate in Australia and how does it apply to deductible business expenses?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.738,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 15.16724159s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '15s'}]}}"
+    },
+    {
+      "id": "HALL-08",
+      "category": "hallucination",
+      "question": "What is the concessional superannuation contribution cap for the 2023-24 financial year?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 35.225,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": 1.0
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-2.5-flash\\nPlease retry in 39.942942522s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '39s'}]}}"
+    }
+  ]
+}
