@@ -236,12 +236,14 @@ three real defects in the app — before any manual testing had noticed them:
 The baseline JSON (`2026-07-10-gemini-baseline.json`) records the *broken*
 pre-fix state — keep it as the "before" snapshot.
 
-### Post-fix results (2026-07-11, easy + hallucination categories)
+### Post-fix results (2026-07-11/12)
 
 | Metric | Pre-fix | Post-fix |
 |---|---|---|
 | easy accuracy | 0.278 | **0.900** |
-| easy retrieval recall | 0.000 | **1.000** |
+| medium accuracy | 0.517 | **0.859** (13/14; MEDIUM-04 hit transient 429) |
+| hard accuracy | 0.750 | **1.000** (2/8 so far; rest pending quota) |
+| retrieval recall | 0.000 | **1.000** (all evaluable cases) |
 | citation faithfulness | 1.000* | 1.000 |
 | hallucination (decline) accuracy | n/a (429s) | **1.000** (6/6 true cases) |
 
@@ -251,11 +253,17 @@ pages while declining.
 Two original hallucination cases (HALL-02 Medicare levy 2%, HALL-06 late
 lodgement penalty) were **reclassified to medium** after the run proved their
 facts ARE in the document (pages 41 and 79) — the system answered both
-grounded with correct citations. This is expected eval-development iteration:
-the run validated the system AND corrected the test set.
+grounded with correct citations. Both scored 1.000 as medium cases on
+2026-07-12. Similarly, MEDIUM-08 was **recalibrated** — the corpus does not
+contain D12 eligibility conditions (the document delegates to ato.gov.au),
+so the system's honest partial answer was correct, not a failure. This is
+expected eval-development iteration: the runs validate the system AND
+correct the test set.
 
-Medium + hard categories (20 generate calls) still pending — fits exactly in
-one day's quota.
+Still pending (one quota day): MEDIUM-04 re-run + HARD-03 through HARD-08
+(7 generate calls). Note that failed requests also count against the 20/day
+quota, and the sequential runner can trip the 10 requests/min limit
+(MEDIUM-04's transient 429) — budget headroom accordingly.
 
 ---
 

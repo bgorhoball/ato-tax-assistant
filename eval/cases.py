@@ -262,11 +262,13 @@ EVAL_CASES: list[EvalCase] = [
             "contributions as a tax deduction at D12?"
         ),
         category="medium",
-        expected_answer_contains=["superannuation", "notice", "intent"],
-        ground_truth_pages=[],  # approx: D12 section
+        expected_answer_contains=["D12", "superannuation"],
+        ground_truth_pages=[53],
         notes=(
-            "D12: eligible if not an employee (or employed <10% of income from employment); "
-            "must also lodge a notice of intent to claim with the super fund."
+            "RECALIBRATED 2026-07-12: the corpus does NOT contain the eligibility "
+            "conditions ('notice of intent' appears nowhere) — the document delegates "
+            "to ato.gov.au (page 53). A correct answer identifies D12 and honestly "
+            "notes the conditions are not stated in the document."
         ),
     ),
     EvalCase(

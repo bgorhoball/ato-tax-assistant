@@ -217,7 +217,7 @@ def main() -> int:
     parser.add_argument(
         "--id",
         dest="case_id",
-        help="Run a single case by ID (e.g. EASY-01).",
+        help="Run specific case(s) by ID, comma-separated (e.g. EASY-01,HARD-02).",
     )
     parser.add_argument(
         "--output", "-o",
@@ -262,7 +262,8 @@ def main() -> int:
     if args.category:
         cases = [c for c in cases if c.category == args.category]
     if args.case_id:
-        cases = [c for c in cases if c.id == args.case_id]
+        wanted = {cid.strip() for cid in args.case_id.split(",")}
+        cases = [c for c in cases if c.id in wanted]
     if not cases:
         print("No cases match the given filters.")
         return 1
