@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 10,
+    "run_cases": 10,
+    "skipped_cases": 0
+  },
+  "skipped": [],
+  "results": [
+    {
+      "id": "EASY-01",
+      "category": "easy",
+      "question": "What does the A2 label on the individual tax return relate to?",
+      "answer": "The A2 label on the individual tax return relates to the **Part-year tax-free threshold**.\n\nThis section is to be completed if, during the 2023-24 financial year, you:\n*   became an Australian resident for tax purposes, or\n*   stopped being an Australian resident for tax purposes.\n\nIf applicable, you need to write the date you became, or stopped being, an Australian resident for tax purposes in the 'Date' box, and the number of months you were an Australian resident for tax purposes up to 30 June 2024 at label N.\n\n(Source: Page 90, Page 52)",
+      "retrieved_pages": [
+        90,
+        51,
+        52,
+        2
+      ],
+      "latency_s": 4.58,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-02",
+      "category": "easy",
+      "question": "What information must I write at label N when completing the A2 part-year tax-free threshold section?",
+      "answer": "When completing the A2 part-year tax-free threshold section, you must write at label N \"the number of months that you were an Australian resident for tax purposes up to 30 June 2024\" (Page 52).",
+      "retrieved_pages": [
+        52,
+        66,
+        9,
+        10
+      ],
+      "latency_s": 2.156,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-03",
+      "category": "easy",
+      "question": "Why does the ATO need information about whether I am an Australian resident for tax purposes?",
+      "answer": "The ATO needs information about whether you are an Australian resident for tax purposes to work out your tax-free threshold. This is particularly important if you were an Australian resident for tax purposes for only part of the year (2023-24), as you would then need to complete question A2 Part-year tax-free threshold in your tax return.\n\n(Page 9, Page 6)",
+      "retrieved_pages": [
+        9,
+        6,
+        9,
+        7
+      ],
+      "latency_s": 3.171,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-04",
+      "category": "easy",
+      "question": "Which item on the individual tax return is used to report salary or wages?",
+      "answer": "Salary or wages are reported at **Item 1 Salary or wages** on the individual tax return.\n\n(Page 10, Page 85)",
+      "retrieved_pages": [
+        10,
+        85,
+        59,
+        85
+      ],
+      "latency_s": 2.875,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-05",
+      "category": "easy",
+      "question": "Where on the individual tax return should allowances, earnings, tips, and directors fees be declared?",
+      "answer": "Allowances, earnings, tips, and director's fees should be declared at **Question 2 \u2013 Allowances, earnings, tips, director\u2019s fees, etc.** on the individual tax return.\n\nSpecifically:\n*   You should add up all of these payments and write the total under **Income** at **label K**.\n*   You should add up any tax withheld from these payments (not including any amount of tax withheld already shown at question 1) and write the total under **Tax withheld** at the left of question 2 \u2013 **label K**.\n\n(Page 11)\n\n**Note:** If you received an overtime meal allowance paid under an industrial agreement or a travel allowance, you don't need to show it in your tax return if:\n*   you spent the whole amount on deductible expenses\n*   it was not shown on your income statement or payment summary\n*   it does not exceed the Commissioner\u2019s reasonable allowance amount.\n(Page 11)",
+      "retrieved_pages": [
+        11,
+        11,
+        10,
+        67
+      ],
+      "latency_s": 5.418,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-06",
+      "category": "easy",
+      "question": "Which item covers Employment Termination Payments on the tax return?",
+      "answer": "Employment Termination Payments (ETPs) are covered under **item 4** on the tax return.\n\n[Page 13, Page 85]",
+      "retrieved_pages": [
+        13,
+        13,
+        13,
+        85
+      ],
+      "latency_s": 2.065,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-07",
+      "category": "easy",
+      "question": "What type of income is reported at item 10 of the individual tax return?",
+      "answer": "Item 10 of the individual tax return is for reporting **Gross interest**.\n\nGross interest includes:\n*   Interest from savings accounts, term deposits, and cash management accounts.\n*   Interest paid or credited by the ATO.\n*   Interest from children's accounts that you opened or operated with funds you used as your own.\n*   Tax file number (TFN) amounts, which are amounts withheld by financial institutions because you did not provide your TFN or Australian business number (ABN) to them.\n\n(Page 19, Page 2, Page 86)",
+      "retrieved_pages": [
+        11,
+        19,
+        2,
+        86
+      ],
+      "latency_s": 5.113,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-08",
+      "category": "easy",
+      "question": "Which item on the tax return is used to declare dividend income?",
+      "answer": "Dividend income is declared under **Item 11 Dividends** on the tax return.\n\nWithin this item, you will declare:\n*   **Unfranked amount** at label **S** (Page 86)\n*   **Franked amount** at label **T** (Page 86)\n*   **Franking credit** at label **U** (Page 86)\n*   **Tax file number amounts withheld from dividends** at label **V** (Page 86)\n\n(Source: Page 20, Page 86)",
+      "retrieved_pages": [
+        20,
+        20,
+        86,
+        20
+      ],
+      "latency_s": 4.046,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-09",
+      "category": "easy",
+      "question": "Where should an individual report their share of income from a partnership or trust on the tax return?",
+      "answer": "Based on the provided context, an individual should report their share of income from a partnership or trust at:\n\n*   **Question 13: Income from partnerships and trusts** (Page 4, Page 67).\n\nSpecifically for partnership income:\n*   If you received a share of income from a partnership carrying on a business in which you were a partner, you should \"Write the total of these amounts at **worksheet 4 \u2013 row (aa)** on page 56\" (Page 56).\n*   Partnership distributions shown at question 13 should not be included in worksheet 2 (Page 55).\n\nFor trust income:\n*   If you have written amounts for trust distributions at Question 13, you will need to attach a **Trust income schedule** to your tax return (Page 67).",
+      "retrieved_pages": [
+        56,
+        67,
+        4,
+        55
+      ],
+      "latency_s": 22.685,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "EASY-10",
+      "category": "easy",
+      "question": "What is the D9 deduction on the individual tax return used for?",
+      "answer": "The D9 deduction on the individual tax return is used for **Gifts or donations**.\n\n(Page 2)",
+      "retrieved_pages": [
+        32,
+        31,
+        2,
+        4
+      ],
+      "latency_s": 11.473,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    }
+  ]
+}

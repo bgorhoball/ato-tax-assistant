@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 8,
+    "run_cases": 8,
+    "skipped_cases": 0
+  },
+  "skipped": [],
+  "results": [
+    {
+      "id": "HALL-01",
+      "category": "hallucination",
+      "question": "What is the exact tax-free threshold dollar amount for Australian residents in the 2023-24 financial year?",
+      "answer": "Based on the provided context, the exact tax-free threshold dollar amount for Australian residents in the 2023-24 financial year is not explicitly stated.\n\nThe context mentions the tax-free threshold in relation to Australian residency (Page 9) and part-year residency (Page 52), but it does not provide the specific dollar amount. The amount \"$28,464\" mentioned on Page 7 relates to the criteria for needing to lodge a tax return, which includes taxable income and other factors, rather than being the tax-free threshold itself.",
+      "retrieved_pages": [
+        9,
+        52,
+        7,
+        42
+      ],
+      "latency_s": 4.424,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-02",
+      "category": "hallucination",
+      "question": "What is the Medicare levy rate expressed as a percentage of taxable income?",
+      "answer": "Australian residents for tax purposes are subject to a Medicare levy of **2%** of their taxable income, unless they qualify for a reduction or exemption (Page 41).",
+      "retrieved_pages": [
+        42,
+        41,
+        41,
+        46
+      ],
+      "latency_s": 1.891,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": 0.0
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-03",
+      "category": "hallucination",
+      "question": "What is the company tax rate for small businesses with an aggregated turnover below $50 million?",
+      "answer": "I am sorry, but the provided context does not contain information about the company tax rate for small businesses with an aggregated turnover below $50 million.",
+      "retrieved_pages": [
+        1,
+        24,
+        51,
+        31
+      ],
+      "latency_s": 2.663,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-04",
+      "category": "hallucination",
+      "question": "What superannuation guarantee percentage must employers pay for the 2023-24 financial year?",
+      "answer": "I don't know the answer to the superannuation guarantee percentage employers must pay for the 2023-24 financial year based on the provided context. The context discusses government super contributions (super co-contribution and low income super tax offset) and superannuation income streams, but not the employer's superannuation guarantee rate.",
+      "retrieved_pages": [
+        53,
+        53,
+        53,
+        16
+      ],
+      "latency_s": 3.082,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": 1.0
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-05",
+      "category": "hallucination",
+      "question": "Who is currently the Commissioner of Taxation at the ATO?",
+      "answer": "Based on the provided context, the name of the Commissioner of Taxation is not mentioned.",
+      "retrieved_pages": [
+        1,
+        1,
+        80,
+        5
+      ],
+      "latency_s": 2.369,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-06",
+      "category": "hallucination",
+      "question": "What penalty does the ATO impose for late lodgement of an individual tax return, and how is it calculated?",
+      "answer": "The ATO may apply a penalty for failure to lodge on time if your tax return is not lodged by the due date (Page 79).\n\nThe penalty is calculated as follows:\n*   **Rate:** One penalty unit for every 28 days (or part thereof) that your tax return is overdue.\n*   **Maximum:** A maximum of 5 penalty units (Page 79).\n\nThe ATO notes that they generally do not apply penalties in isolated cases of late lodgment and consider individual circumstances when deciding what action to take (Page 79). For more information regarding penalty units, you can refer to ato.gov.au/failuretolodgeontimepenalty (Page 79).",
+      "retrieved_pages": [
+        79,
+        79,
+        1,
+        79
+      ],
+      "latency_s": 3.648,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-07",
+      "category": "hallucination",
+      "question": "What is the GST rate in Australia and how does it apply to deductible business expenses?",
+      "answer": "Based on the provided context:\n\nThe GST rate in Australia is **not specified** in the provided text.\n\nRegarding how GST applies to deductible business expenses, the context states:\n\"If your expense includes an amount of goods and services tax (GST), the GST is part of the total expense and is therefore part of any deduction. For example, if you incurred union fees of $440 which included $40 GST, you claim a deduction for $440.\" (Page 24)",
+      "retrieved_pages": [
+        24,
+        24,
+        24,
+        30
+      ],
+      "latency_s": 3.158,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-08",
+      "category": "hallucination",
+      "question": "What is the concessional superannuation contribution cap for the 2023-24 financial year?",
+      "answer": "Based on the provided context, the concessional superannuation contribution cap for the 2023-24 financial year is not specified.\n\nThe context mentions \"Your concessional contributions to your super exceeded your concessional contributions cap\" (Page 7), indicating that such a cap exists, but it does not state the actual dollar amount of the cap.",
+      "retrieved_pages": [
+        53,
+        53,
+        7,
+        69
+      ],
+      "latency_s": 7.033,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": 1.0
+      },
+      "error": null
+    }
+  ]
+}

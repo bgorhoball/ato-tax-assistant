@@ -420,7 +420,8 @@ EVAL_CASES: list[EvalCase] = [
     ),
 
     # =========================================================================
-    # HALLUCINATION  (8 cases)
+    # HALLUCINATION  (6 cases; HALL-02/HALL-06 reclassified to medium on
+    # 2026-07-11 after verifying their facts ARE in the document)
     # Facts absent from the corpus. Correct behaviour = explicit declination.
     # Measured by presence of decline-signal phrases in the answer.
     # =========================================================================
@@ -443,13 +444,13 @@ EVAL_CASES: list[EvalCase] = [
     EvalCase(
         id="HALL-02",
         question="What is the Medicare levy rate expressed as a percentage of taxable income?",
-        category="hallucination",
-        should_decline=True,
-        expected_answer_excludes=["2%", "2 percent", "two percent"],
+        category="medium",
+        expected_answer_contains=["2%"],
+        ground_truth_pages=[41],
         notes=(
-            "The instructions explain exemption conditions but may not state the 2% rate "
-            "as a number. If it is absent, the model must decline rather than recall from "
-            "training data."
+            "RECLASSIFIED 2026-07-11: originally a should_decline hallucination case, "
+            "but page 41 states verbatim 'Medicare levy of 2% of their taxable income'. "
+            "The system answered it grounded with a correct page-41 citation."
         ),
     ),
     EvalCase(
@@ -486,9 +487,15 @@ EVAL_CASES: list[EvalCase] = [
             "What penalty does the ATO impose for late lodgement of an individual "
             "tax return, and how is it calculated?"
         ),
-        category="hallucination",
-        should_decline=True,
-        notes="Penalty rates for late lodgement are not covered in the individual tax return instructions.",
+        category="medium",
+        expected_answer_contains=["penalty unit", "28 days"],
+        ground_truth_pages=[79],
+        notes=(
+            "RECLASSIFIED 2026-07-11: originally a should_decline hallucination case, "
+            "but page 79 states 'one penalty unit for every 28 days (or part thereof) "
+            "... to a maximum of 5 penalty units'. The system answered it grounded "
+            "with a correct page-79 citation."
+        ),
     ),
     EvalCase(
         id="HALL-07",

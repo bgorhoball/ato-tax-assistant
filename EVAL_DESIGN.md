@@ -70,9 +70,9 @@ Exit code is `0` if every evaluable case reaches `answer_accuracy ≥ 0.5`
 | Category | Count | Purpose |
 |---|---|---|
 | `easy` | 10 | Baseline: can the retriever find the right chunk at all? High lexical overlap between question and source text. Top-1 retrieval should hit the target. |
-| `medium` | 12 | Core: multi-chunk synthesis or semantic rather than keyword match. Tests whether `k=4` surfaces enough context and the LLM connects it correctly. |
+| `medium` | 14 | Core: multi-chunk synthesis or semantic rather than keyword match. Tests whether `k=4` surfaces enough context and the LLM connects it correctly. (Includes HALL-02/HALL-06, reclassified from hallucination on 2026-07-11 — their facts turned out to be in the document.) |
 | `hard` | 8 | Stress: implicit reasoning, multi-hop, or arithmetic over retrieved facts. Retrieval may partially miss; tests LLM's ability to reason with imperfect context. |
-| `hallucination` | 8 | Safety: facts absent from the corpus. The model should explicitly decline rather than recall from training memory. This is the highest-stakes failure mode for a tax assistant. |
+| `hallucination` | 6 | Safety: facts absent from the corpus. The model should explicitly decline rather than recall from training memory. This is the highest-stakes failure mode for a tax assistant. |
 | `skip` | 5 | Roadmap: tests for Layer 3 (enforced citation), Layer 5 (PII), prod infra, and multi-turn. Present as a contract — activate each test when the feature is built. |
 
 ### Why a difficulty gradient?
@@ -234,8 +234,28 @@ three real defects in the app — before any manual testing had noticed them:
      (`ingest_pdf(..., delay=60)`).
 
 The baseline JSON (`2026-07-10-gemini-baseline.json`) records the *broken*
-pre-fix state — keep it as the "before" snapshot. Record a new full baseline
-after the fix (quota permitting).
+pre-fix state — keep it as the "before" snapshot.
+
+### Post-fix results (2026-07-11, easy + hallucination categories)
+
+| Metric | Pre-fix | Post-fix |
+|---|---|---|
+| easy accuracy | 0.278 | **0.900** |
+| easy retrieval recall | 0.000 | **1.000** |
+| citation faithfulness | 1.000* | 1.000 |
+| hallucination (decline) accuracy | n/a (429s) | **1.000** (6/6 true cases) |
+
+\* pre-fix faithfulness was vacuously high — the model cited retrieved (wrong)
+pages while declining.
+
+Two original hallucination cases (HALL-02 Medicare levy 2%, HALL-06 late
+lodgement penalty) were **reclassified to medium** after the run proved their
+facts ARE in the document (pages 41 and 79) — the system answered both
+grounded with correct citations. This is expected eval-development iteration:
+the run validated the system AND corrected the test set.
+
+Medium + hard categories (20 generate calls) still pending — fits exactly in
+one day's quota.
 
 ---
 
