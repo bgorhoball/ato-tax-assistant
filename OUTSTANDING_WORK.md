@@ -54,8 +54,12 @@ Last updated: 2026-07-12. Current branch: `feature/rag-eval-framework`.
 
 ## Task 1 — Finish the post-fix eval baseline (7 generate calls)
 
-**Blocked until:** the daily generate quota resets (next calendar day after
-2026-07-12, Google's reset time).
+**✅ DONE 2026-07-13** — all 38 cases complete, 0 errors
+(`eval/results/2026-07-13-remaining.json`). Final numbers are in
+`EVAL_DESIGN.md`: easy 0.900 / medium 0.869 / hard 0.917 / hallucination
+1.000 / overall 0.908. Do not re-run; proceed to Task 2+.
+
+Original instructions kept for reference:
 
 ```bash
 cd /home/brian/ai-workspace/ato-tax-assistant

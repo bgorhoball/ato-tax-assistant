@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 7,
+    "run_cases": 7,
+    "skipped_cases": 0
+  },
+  "skipped": [],
+  "results": [
+    {
+      "id": "MEDIUM-04",
+      "category": "medium",
+      "question": "How is a net capital gain calculated for inclusion in the individual tax return at item 17?",
+      "answer": "Based on the provided context, the documents mention \"net capital gains\" but do not describe *how* a net capital gain is calculated.\n\nThe context states that \"net capital gains from the disposal of any of the property or investments referred to above\" (likely referring to property or investments related to one's own business or an active partnership) are included in the income calculation for **question A1 \u2013 label J** (Page 51).\n\nHowever, the steps for calculating the net capital gain itself (e.g., capital proceeds minus cost base, applying discounts, netting gains and losses) are not detailed in the provided text. Furthermore, the context does not mention \"item 17\" in relation to net capital gains.",
+      "retrieved_pages": [
+        51,
+        62,
+        69,
+        12
+      ],
+      "latency_s": 5.719,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-03",
+      "category": "hard",
+      "question": "How are prior-year carried-forward capital losses treated when calculating the net capital gain at item 17?",
+      "answer": "Based on the provided context, there is no information on how prior-year carried-forward capital losses are treated when calculating the net capital gain at item 17.\n\nThe context mentions that capital losses should not be shown at question L1, \"Tax losses of earlier income years\" (Page 35), but it does not elaborate on their treatment elsewhere, specifically regarding item 17 or net capital gains.",
+      "retrieved_pages": [
+        62,
+        35,
+        62,
+        87
+      ],
+      "latency_s": 3.829,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-04",
+      "category": "hard",
+      "question": "Can an individual claim a deduction for interest on money borrowed to purchase dividend-paying shares, and if so, under which item?",
+      "answer": "Yes, an individual can claim a deduction for interest paid on money borrowed to purchase dividend-paying shares.\n\nThis deduction is claimed under **question D8 (Dividend deductions)**. The context explicitly states that \"interest paid on money borrowed to purchase shares or similar investments\" is an allowable expense for dividend deductions [Page 32].\n\nThe total amount of these deductions should be written at **question D8 \u2013 label H** [Page 32].",
+      "retrieved_pages": [
+        32,
+        32,
+        62,
+        31
+      ],
+      "latency_s": 3.631,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-05",
+      "category": "hard",
+      "question": "What is attributed personal services income at item 9, and how does the ATO treat it differently from salary income?",
+      "answer": "Based on the provided context:\n\n**What is attributed personal services income at item 9?**\n\nAttributed personal services income at item 9 refers to income you received from providing personal services where:\n* You received a PAYG payment summary \u2013 business and personal services income showing an 'X' against \u2018Personal services attributed income\u2019, or\n* Personal services income was attributed to you.\n\nIf you received personal services income (PSI) as a sole trader, you should **not** complete question 9. Instead, you must complete question 14 in the Tax return for individuals (supplementary section) 2024 (Page 18).\n\nTo complete question 9, you will need your PAYG payment summary \u2013 business and personal services income and details of any other PSI attributed to you. You write the total amount of tax withheld under 'Tax withheld' at label O, and the total amount of PSI attributed to you at label P (Page 18).\n\n**How does the ATO treat it differently from salary income?**\n\nThe provided context **does not** explicitly detail how attributed personal services income is treated differently from salary income. It focuses on the reporting requirements for attributed PSI at question 9 and distinguishes it from PSI received as a sole trader (Page 18).",
+      "retrieved_pages": [
+        18,
+        18,
+        11,
+        68
+      ],
+      "latency_s": 5.434,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-06",
+      "category": "hard",
+      "question": "Under what circumstances must an individual complete the seniors and pensioners tax offset at item T7?",
+      "answer": "Based on the provided context, the seniors and pensioners tax offset is discussed under item **T1**, not T7.\n\nYou can claim the seniors and pensioners tax offset (T1) if you met all the conditions relating to:\n*   eligibility for Australian Government pensions or allowances, and\n*   income.\n\n**Condition 1: Eligibility for Australian Government pensions and similar payments** (Page 37)\nThis condition is met if either:\n*   You showed an Australian Government pension or allowance from Centrelink, or a pension, allowance or benefit from the Department of Veterans' Affairs (DVA) at question 6 in your tax return.\n*   You met the Centrelink age pension age requirement and were eligible for an Australian Government age pension during 2023\u201324 (even if you didn't receive it due to not making a claim, or the income or assets test), and you satisfied one of the following:\n    *   You had been an Australian resident for age-pension purposes for 10 years or more, of which at least 5 years were continuous.\n    *   You had a qualifying residence exemption because you arrived in Australia as a refugee or under a special humanitarian program.\n    *   You received a partner allowance, a widow allowance, or a widow B pension, immediately.\n\n**Condition 2: Income** (Page 36)\nYour rebate income determines whether you are eligible for the seniors and pensioners tax offset at question T1.\n\n**Additional points:**\n*   If you had a spouse, you also need to work out whether they were eligible. The amount of the tax offset is based on your individual rebate income, not your combined rebate income (Page 36).\n*   You cannot claim this tax offset if you were in jail for the whole of 2023\u201324 (Page 36).\n*   If you are eligible, the ATO uses the information you provide at this question to work out the amount of your tax offset for you (Page 36).\n\nFor the meaning of rebate income, combined rebate income, and spouse, refer to Definitions on pages 69 and 72.\n\n(Source: Pages 36, 37, 72)",
+      "retrieved_pages": [
+        36,
+        72,
+        39,
+        37
+      ],
+      "latency_s": 4.434,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-07",
+      "category": "hard",
+      "question": "How does the A1 net investment loss add-back affect the income figure used when assessing eligibility for the private health insurance Medicare levy surcharge?",
+      "answer": "Based on the provided context:\n\n1.  **A1** refers to \"Under 18\" (Page 2, Page 90), not a net investment loss. The relevant item for net financial investment loss is **IT5 Net financial investment loss** (Page 2, Page 69).\n\n2.  The context defines \"income for MLS purposes\" as:\n    *   your taxable income\n    *   your total reportable fringe benefits, and\n    *   any amount on which family trust distribution tax has been paid.\n    (Page 45)\n\n3.  While \"net financial investment loss\" (IT5) is listed as an add-back when calculating **Adjusted Taxable Income (ATI)** on the ATI worksheet (Page 69), the definition of \"income for MLS purposes\" provided on Page 45 **does not include** an add-back for net financial investment loss.\n\nTherefore, based solely on the provided context, a net financial investment loss (IT5) does not affect the income figure used when assessing eligibility for the private health insurance Medicare levy surcharge (M2). The context defines \"income for MLS purposes\" separately and does not list this as an adjustment for MLS eligibility.",
+      "retrieved_pages": [
+        2,
+        90,
+        45,
+        69
+      ],
+      "latency_s": 5.565,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HARD-08",
+      "category": "hard",
+      "question": "If an individual uses their car for both work and private purposes, what proportion of car expenses can be claimed under D1, and which method determines that proportion?",
+      "answer": "If an individual uses their car for both work and private purposes, they can only claim the car expenses incurred in performing their employment duties. The context does not specify a \"proportion\" of total expenses in a percentage sense for the cents per kilometre method, but rather calculates the claim based solely on work-related kilometres.\n\nThe methods available to determine the claim are:\n\n1.  **Cents per kilometre method:**\n    *   This method allows claiming up to 5,000 work-related kilometres per car.\n    *   The claim is calculated by multiplying the \"Total work-related kilometres\" (up to 5,000 km) by 85 cents per kilometre, then dividing by 100 to get the dollar amount (Page 25).\n    *   No written evidence of expenses is necessary, but you need to show how you worked out your work-related kilometres (e.g., diary records) (Page 25).\n\n2.  **Logbook method:**\n    *   This method **must** be used if work-related kilometres are over 5,000 kilometres (Page 25).\n    *   If work-related kilometres are 5,000 km or less, it can be chosen as an alternative to the cents per kilometre method (Page 25).\n    *   The provided context states that if you are using the logbook method, you must go to ato.gov.au/taxreturninstructions2024 and read question D1 for details on how to work out your claim. The specific mechanism for determining the proportion of expenses under the logbook method is not detailed in the provided text (Page 25).\n\nIn summary, only the work-related portion of car expenses can be claimed. The cents per kilometre method determines this by directly calculating the claim based on work-related kilometres. The logbook method also determines the work-related portion, but its specific calculation details are not provided in this context.\n\n**References:**\n*   Page 25, \"D1 Work-related car expenses\"\n*   Page 25, \"What can you claim?\"\n*   Page 25, \"Methods\"\n*   Page 25, \"Cents per kilometre method\"",
+      "retrieved_pages": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "latency_s": 8.616,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    }
+  ]
+}

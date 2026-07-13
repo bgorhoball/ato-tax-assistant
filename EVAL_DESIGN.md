@@ -236,13 +236,17 @@ three real defects in the app — before any manual testing had noticed them:
 The baseline JSON (`2026-07-10-gemini-baseline.json`) records the *broken*
 pre-fix state — keep it as the "before" snapshot.
 
-### Post-fix results (2026-07-11/12)
+### Post-fix results (complete baseline, 2026-07-11 to 2026-07-13)
+
+All 38 runnable cases, 0 errors. Result files: `*-postfix.json` +
+`2026-07-13-remaining.json`.
 
 | Metric | Pre-fix | Post-fix |
 |---|---|---|
-| easy accuracy | 0.278 | **0.900** |
-| medium accuracy | 0.517 | **0.859** (13/14; MEDIUM-04 hit transient 429) |
-| hard accuracy | 0.750 | **1.000** (2/8 so far; rest pending quota) |
+| easy accuracy | 0.278 | **0.900** (10/10) |
+| medium accuracy | 0.517 | **0.869** (14/14) |
+| hard accuracy | 0.750 | **0.917** (8/8) |
+| overall accuracy | 0.437 | **0.908** (38/38) |
 | retrieval recall | 0.000 | **1.000** (all evaluable cases) |
 | citation faithfulness | 1.000* | 1.000 |
 | hallucination (decline) accuracy | n/a (429s) | **1.000** (6/6 true cases) |
@@ -260,10 +264,10 @@ so the system's honest partial answer was correct, not a failure. This is
 expected eval-development iteration: the runs validate the system AND
 correct the test set.
 
-Still pending (one quota day): MEDIUM-04 re-run + HARD-03 through HARD-08
-(7 generate calls). Note that failed requests also count against the 20/day
-quota, and the sequential runner can trip the 10 requests/min limit
-(MEDIUM-04's transient 429) — budget headroom accordingly.
+The baseline is complete as of 2026-07-13. Quota lessons for future runs:
+failed requests also count against the 20/day quota, and the sequential
+runner can trip the 10 requests/min limit (MEDIUM-04's transient 429 on
+2026-07-12) — budget ≤18 calls/day with sleeps between invocations.
 
 ---
 
