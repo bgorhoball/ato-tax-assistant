@@ -115,8 +115,8 @@ EVAL_CASES: list[EvalCase] = [
         question="Which item on the individual tax return is used to report salary or wages?",
         category="easy",
         expected_answer_contains=["item 1", "salary"],
-        ground_truth_pages=[],  # approx: early income section
-        notes="Item 1 is 'Salary or wages' — standard ATO form structure.",
+        ground_truth_pages=[10],
+        notes="Item 1 'Salary or wages' instructions at metadata p10 (verified 2026-07-17).",
     ),
     EvalCase(
         id="EASY-05",
@@ -134,24 +134,24 @@ EVAL_CASES: list[EvalCase] = [
         question="Which item covers Employment Termination Payments on the tax return?",
         category="easy",
         expected_answer_contains=["item 4", "termination"],
-        ground_truth_pages=[],  # approx
-        notes="Item 4 is 'Employment termination payments'.",
+        ground_truth_pages=[13],
+        notes="ETP instructions at metadata p13 (verified 2026-07-17).",
     ),
     EvalCase(
         id="EASY-07",
         question="What type of income is reported at item 10 of the individual tax return?",
         category="easy",
         expected_answer_contains=["interest"],
-        ground_truth_pages=[],  # approx
-        notes="Item 10 is 'Gross interest'.",
+        ground_truth_pages=[19],
+        notes="'Gross interest' instructions at metadata p19 (verified 2026-07-17).",
     ),
     EvalCase(
         id="EASY-08",
         question="Which item on the tax return is used to declare dividend income?",
         category="easy",
         expected_answer_contains=["item 11", "dividend"],
-        ground_truth_pages=[],  # approx
-        notes="Item 11 is 'Dividends'.",
+        ground_truth_pages=[20],
+        notes="Dividends instructions ('franking credit') at metadata p20 (verified 2026-07-17).",
     ),
     EvalCase(
         id="EASY-09",
@@ -161,8 +161,12 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="easy",
         expected_answer_contains=["item 13", "partner"],
-        ground_truth_pages=[],  # approx
-        notes="Item 13 is 'Partnerships and trusts'.",
+        ground_truth_pages=[67],
+        notes=(
+            "'Partnerships and trusts' appears only at metadata p67 (supplementary-"
+            "section pointer) — full item 13 instructions are in the supplement, "
+            "which is NOT in this corpus (verified 2026-07-17)."
+        ),
     ),
     EvalCase(
         id="EASY-10",
@@ -171,8 +175,8 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="easy",
         expected_answer_contains=["gifts", "donations"],
-        ground_truth_pages=[],  # approx
-        notes="D9 is 'Gifts or donations'.",
+        ground_truth_pages=[32],
+        notes="D9 'Gifts or donations' / DGR instructions at metadata p32 (verified 2026-07-17).",
     ),
 
     # =========================================================================
@@ -189,8 +193,11 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="medium",
         expected_answer_contains=["cents per kilometre", "logbook"],
-        ground_truth_pages=[],  # approx: D1 section
-        notes="ATO D1 allows cents-per-km method or logbook method only.",
+        ground_truth_pages=[25],
+        notes=(
+            "Both methods described at metadata p25 (verified 2026-07-17; "
+            "D1 section spans ~p22-27)."
+        ),
     ),
     EvalCase(
         id="MEDIUM-02",
@@ -200,8 +207,12 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="medium",
         expected_answer_contains=["current", "employment", "income"],
-        ground_truth_pages=[],  # approx: D4 section
-        notes="D4: the course must maintain or improve skills required in current employment and lead to income.",
+        ground_truth_pages=[28],
+        notes=(
+            "D4 self-education instructions at metadata p28 (verified 2026-07-17; "
+            "section spans p27-29 — if recall reads 0 with a neighbour page "
+            "retrieved, adjust per triage protocol)."
+        ),
     ),
     EvalCase(
         id="MEDIUM-03",
@@ -211,8 +222,8 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="medium",
         expected_answer_contains=["deductible gift recipient", "$2"],
-        ground_truth_pages=[],  # approx: D9 section
-        notes="D9: gift must be to a DGR, amount $2 or more, no material benefit received in return.",
+        ground_truth_pages=[32],
+        notes="'DGR' appears only at metadata p32 (verified 2026-07-17).",
     ),
     EvalCase(
         id="MEDIUM-04",
@@ -233,8 +244,16 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="medium",
         expected_answer_contains=["net investment loss", "A1"],
-        ground_truth_pages=[],  # approx: adjustments section
-        notes="A1 adds back net investment loss to income for Medicare levy / HECS repayment threshold calculations.",
+        ground_truth_pages=[61],
+        notes=(
+            "'net financial investment loss' income-test instructions (IT5/IT6) at "
+            "metadata p61 (verified 2026-07-17; span p61-62). NOTE: the question's "
+            "'A1' label may not match the 2024 form — candidate for recalibration "
+            "if the answer disputes the label. KNOWN NEAR-MISS (2026-07-17): dense "
+            "retrieval fetched p62/p51/p57/p22 but not p61 (recall 0) — first "
+            "concrete target for spec 02 hybrid retrieval; do NOT change this GT "
+            "to make the score pass."
+        ),
     ),
     EvalCase(
         id="MEDIUM-06",
@@ -312,8 +331,8 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="medium",
         expected_answer_contains=["tax affairs", "D10"],
-        ground_truth_pages=[],  # approx: D10 section
-        notes="D10: tax agent fees, travel to tax agent, interest on tax debts, purchase of tax reference material.",
+        ground_truth_pages=[33],
+        notes="'cost of managing' / D10 instructions at metadata p33 (verified 2026-07-17).",
     ),
 
     # =========================================================================
@@ -360,8 +379,12 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="hard",
         expected_answer_contains=["carried forward", "loss", "prior"],
-        ground_truth_pages=[],  # approx: item 17
-        notes="Prior-year capital losses offset current-year gains before the 50% discount is applied.",
+        ground_truth_pages=[35],
+        notes=(
+            "'earlier income years' + 'capital loss' both at metadata p35 "
+            "(verified 2026-07-17). Full CGT calculation is in the supplement "
+            "(not in corpus) — p35 is the closest in-corpus content."
+        ),
     ),
     EvalCase(
         id="HARD-04",
@@ -371,8 +394,11 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="hard",
         expected_answer_contains=["interest", "D7", "dividend"],
-        ground_truth_pages=[],  # approx: D7 section
-        notes="D7 covers interest on borrowed funds used to earn assessable income including dividends.",
+        ground_truth_pages=[31],
+        notes=(
+            "D7 interest-deduction instructions at metadata p31 (verified "
+            "2026-07-17; 'money borrowed' content continues to p32)."
+        ),
     ),
     EvalCase(
         id="HARD-05",
@@ -393,8 +419,12 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="hard",
         expected_answer_contains=["seniors", "T7"],
-        ground_truth_pages=[],  # approx: T7 section
-        notes="T7: individuals of eligible age receiving Australian Government pension or meeting the income test.",
+        ground_truth_pages=[36],
+        notes=(
+            "'Seniors and pensioners' instructions at metadata p36 (verified "
+            "2026-07-17; span p36-38). NOTE: the question's 'T7' label may not "
+            "match the 2024 form (SAPTO may be T2) — candidate for recalibration."
+        ),
     ),
     EvalCase(
         id="HARD-07",
@@ -417,8 +447,11 @@ EVAL_CASES: list[EvalCase] = [
         ),
         category="hard",
         expected_answer_contains=["work", "logbook", "percentage"],
-        ground_truth_pages=[],  # approx: D1
-        notes="Logbook method determines the work-use percentage; cents-per-km is per actual work km only.",
+        ground_truth_pages=[25],
+        notes=(
+            "Logbook / work-related car content at metadata p25 (verified "
+            "2026-07-17; the 2026-07-13 run retrieved p25 four times for this case)."
+        ),
     ),
 
     # =========================================================================
