@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+
+github_repo        = "bgorhoball/ato-tax-assistant"
+app_hostname       = "tax.your-domain.com"
+cloudflare_zone_id = "your-cloudflare-zone-id"
+alert_email        = "you@example.com"
+
+# Optional overrides:
+# project_name = "ato-rag"   # must match ECR_REPOSITORY etc. in .github/workflows/deploy.yml
+# aws_region   = "us-east-1"
+# task_memory  = 1024        # bump to 2048 when the PII/NER layer lands

@@ -1,0 +1,287 @@
+{
+  "meta": {
+    "k": 4,
+    "pass_threshold": 0.5,
+    "total_cases": 14,
+    "run_cases": 14,
+    "skipped_cases": 0
+  },
+  "skipped": [],
+  "results": [
+    {
+      "id": "MEDIUM-01",
+      "category": "medium",
+      "question": "What are the two methods available for calculating work-related car expense deductions under item D1?",
+      "answer": "Based on the provided context, the two methods available for calculating work-related car expense deductions under item D1 are:\n\n1.  **Cents per kilometre method**\n2.  **Logbook method**\n\n(Page 25)",
+      "retrieved_pages": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "latency_s": 3.195,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-02",
+      "category": "medium",
+      "question": "What conditions must be satisfied to claim a deduction for self-education expenses at D4?",
+      "answer": "To claim a deduction for self-education expenses at D4, the following conditions must be satisfied:\n\n1.  **Close Connection to Work:** You must be able to show there is a close connection between the course and your work activities at the time you incur the expenses (Page 28).\n2.  **Purpose of Course (one of the following):**\n    *   The course maintained or improved a skill or specific knowledge required for your work activities (Page 28).\n    *   You could show that the course was leading to, or was likely to lead to, increased income from your work activities (Page 28).\n\nYou **cannot** claim a deduction for self-education expenses for a course that either:\n*   Relates only in a general way to your current employment or profession (Page 28).\n*   Will enable you to get new employment (Page 28).\n*   Is claimed against government assistance payments, including Austudy, ABSTUDY and youth allowance (Page 28).",
+      "retrieved_pages": [
+        28,
+        29,
+        28,
+        28
+      ],
+      "latency_s": 4.851,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-03",
+      "category": "medium",
+      "question": "What are the requirements for a gift or donation to be claimable as a tax deduction at D9?",
+      "answer": "Based on the provided context, the requirements for a gift or donation to be claimable as a tax deduction at D9 are:\n\n*   The gift or donation must be **$2 or more**. (Page 32)\n*   It must be made to an organisation that has **deductible gift recipient (DGR) status**. You can check this by contacting the organisation or visiting abn.business.gov.au. (Page 32)\n*   Generally, you **cannot claim a deduction if you received something in return** (for example, raffle tickets or a dinner). (Page 32)\n*   **Receipts are generally required** for donations of more than $10. (Page 32)\n*   An exception exists for **small cash donations to bucket collections** (each of $2 or more) \u2013 for example, to collections conducted by a DGR for natural disaster victims. For these, you can claim a total tax deduction of up to $10 for the income year **without a receipt**. (Page 32)\n*   For specific types of donations, such as **gifts of property and shares, contributions to fund-raising events, or political donations**, you must refer to ato.gov.au/taxreturninstructions 2024 for more information. (Page 32)",
+      "retrieved_pages": [
+        32,
+        32,
+        2,
+        32
+      ],
+      "latency_s": 6.482,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-04",
+      "category": "medium",
+      "question": "How is a net capital gain calculated for inclusion in the individual tax return at item 17?",
+      "answer": "",
+      "retrieved_pages": [],
+      "latency_s": 39.653,
+      "metrics": {
+        "answer_accuracy": 0.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": "Error calling model 'gemini-2.5-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\\nPlease retry in 30.151856433s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '30s'}]}}"
+    },
+    {
+      "id": "MEDIUM-05",
+      "category": "medium",
+      "question": "What is the A1 adjustment for total net investment loss and why must it be completed?",
+      "answer": "Based on the provided context, there is no mention of an \"A1 adjustment for total net investment loss.\"\n\nHowever, the context does refer to:\n\n1.  **Question A1 \u2013 label J** (Page 51): This label is used to report the net amount from:\n    *   Income from your own business\n    *   Income from a partnership in which you were an active partner\n    *   Net capital gains from the disposal of certain property or investments\n    *   Income from investment of amounts referred to above\n    After deducting related expenses, this net amount is written at A1 \u2013 label J. If the amount is $0 or a negative amount (a loss), you must write **0 (zero)** at question A1 \u2013 label J. You also print 'M' in the TYPE box.\n\n2.  **Net financial investment loss (question IT5 \u2013 label X)** (Page 62 and 22):\n    *   Page 62 describes how to calculate \"Total partnerships investment net income or loss\" (row q). If this amount is negative, it is written at **question IT5 \u2013 label X**.\n    *   Page 22 explains that your \"net financial investment loss (question IT5 \u2013 label X)\" is one of the amounts that must be added to your taxable income (for the purpose of calculating eligibility for a reduction in discounts received under 'taxed-upfront schemes'). This indicates why recording this loss is important for other calculations in your tax return.\n\nTherefore, while A1 \u2013 label J deals with certain types of net income/loss (where a loss is reported as zero), and IT5 \u2013 label X specifically captures a net financial investment loss (if negative), the context does not describe an \"A1 adjustment for total net investment loss.\"",
+      "retrieved_pages": [
+        62,
+        51,
+        57,
+        22
+      ],
+      "latency_s": 25.513,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-06",
+      "category": "medium",
+      "question": "What income is captured at item 21 for total reportable fringe benefits amounts?",
+      "answer": "Based on the provided context, the relevant item for \"Total reportable fringe benefits amounts\" is **IT1**, not \"item 21.\"\n\nAt **IT1 Total reportable fringe benefits amounts**, the following income is captured:\n\n1.  **Reportable fringe benefits amounts from employers exempt from FBT under section 57A of the FBTAA 1986.** These are identified on:\n    *   Payment summaries with \"Yes\" selected at \"Is the employer exempt from FBT under section 57A of the FBTAA 1986?\"\n    *   Income statements at \"Reportable fringe benefits \u2013 exempt amount.\"\n    This total is written at question IT1 \u2013 label N. (Page 59, Page 91)\n\n2.  **Reportable fringe benefits amounts from employers not exempt from FBT under section 57A of the FBTAA 1986.** These are identified on:\n    *   Payment summaries with \"No\" selected at \"Is the employer exempt from FBT under section 57A of the FBTAA 1986?\"\n    *   Income statements at \"Reportable fringe benefits \u2013 non-exempt amount.\"\n    This total is written at question IT1 \u2013 label W. (Page 59, Page 91)\n\nIf the total reportable fringe benefits amounts are less than $3,773, the individual would write 0 (zero) at labels N and W. (Page 59)",
+      "retrieved_pages": [
+        59,
+        91,
+        92,
+        68
+      ],
+      "latency_s": 6.725,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-07",
+      "category": "medium",
+      "question": "Where and how should foreign source income be reported on an individual tax return?",
+      "answer": "Based on the provided context, foreign source income should be reported in the following ways:\n\n1.  **General Foreign Source Income:**\n    *   You will likely need the **Individual supplementary tax return instructions 2024** if you have \"Foreign source income and foreign assets or property, including foreign source pension or annuity\" (Page 4, Question 20). The specific labels for reporting all types of foreign source income at Question 20 are not detailed in this context, except for exempt foreign employment income.\n\n2.  **Target Foreign Income:**\n    *   **Where:** Question IT4 \u2013 label V (Page 61).\n    *   **How:** Add up all your target foreign income for 2023\u201324 and show the total in Australian dollars. If you received no target foreign income, write 0 (zero) at label V. (Page 61).\n    *   **Definition:** Target foreign income includes income earned, derived or received from sources outside Australia, and periodical payments/benefits by way of gifts or allowances from a source outside Australia, provided it hasn't been included in your taxable income or received as a fringe benefit. (Page 61).\n    *   **Note:** You must include 'exempt foreign employment income' from question 20 \u2013 label N in your target foreign income total, but don't include any other foreign income amount shown elsewhere in your tax return. (Page 61).\n\n3.  **Foreign Employment Income (from PAYG payment summary):**\n    *   **Where:** Under 'Income' at label E (for gross payment amounts) and 'Tax withheld' at label E (for total tax withheld). (Page 10).\n    *   **How:** Add up the gross payment amounts from your income statement and PAYG payment summary \u2013 foreign employment, and write the total under 'Income' at label E. Add up the total tax withheld and write it under 'Tax withheld' at label E. (Page 10).\n\n4.  **Exempt Foreign Employment Income:**\n    *   **Where:** Question 20 \u2013 label N (Page 61).\n    *   **How:** The context states that this amount should be included in your target foreign income total (IT4 \u2013 label V), but it does not detail the specific instructions for reporting it directly at Question 20 \u2013 label N. (Page 61).\n\n5.  **Foreign Income Tax Offset:**\n    *   If you have paid foreign income tax, you may be entitled to claim a foreign income tax offset. To do this, you must complete the supplementary tax return question 20 \u2013 label O. (Page 22). The context does not detail how to report the income itself for this offset, but rather the offset claim.",
+      "retrieved_pages": [
+        61,
+        10,
+        22,
+        4
+      ],
+      "latency_s": 11.165,
+      "metrics": {
+        "answer_accuracy": 0.5,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-08",
+      "category": "medium",
+      "question": "Under what conditions can an individual claim personal superannuation contributions as a tax deduction at D12?",
+      "answer": "Based on the provided context, D12 is the label for \"Personal superannuation contributions\" under \"Deductions\" (Page 4).\n\nHowever, the context **does not explicitly state the conditions** under which an individual can claim personal superannuation contributions as a tax deduction at D12.\n\nIt does refer to the ATO website for further information: \"You can go to ato.gov.au/taxreturninstructions2024 to find out about eligible personal super contributions, contribution caps and your total superannuation balance\" (Page 53). This implies that there are specific eligibility criteria, contribution caps, and total superannuation balance considerations that determine if personal super contributions are deductible.",
+      "retrieved_pages": [
+        53,
+        4,
+        69,
+        22
+      ],
+      "latency_s": 4.462,
+      "metrics": {
+        "answer_accuracy": 0.333,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-09",
+      "category": "medium",
+      "question": "What is the purpose of the T5 item relating to private health insurance policy details?",
+      "answer": "Based on the provided context, there is no mention of a \"T5 item\" relating to private health insurance policy details. The document refers to labels such as \"B Health insurer ID\" and \"C Membership number\", and various \"Tax claim codes\" (e.g., D, F), but not \"T5\".\n\nTherefore, I cannot determine the purpose of a T5 item from the given information.",
+      "retrieved_pages": [
+        48,
+        48,
+        50,
+        49
+      ],
+      "latency_s": 20.959,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": null,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-10",
+      "category": "medium",
+      "question": "What income amounts are counted toward the Medicare levy surcharge income threshold?",
+      "answer": "Based on the provided context, the specific income amounts that are counted toward the Medicare levy surcharge (MLS) income threshold are not fully detailed.\n\nHowever, the context states:\n*   To work out your income for MLS purposes, you should use **Worksheet 1 on page 46** or go to **ato.gov.au/incometestscalculator** (Page 45).\n*   Each individual's income for MLS purposes is calculated by **subtracting row (k) from row (j)** (Page 47).\n*   For combined income, it's the sum of each individual's income for MLS purposes (row (l)) (Page 47).\n*   The context also mentions that if you received a **superannuation lump sum** (other than a death benefit) during 2023\u201324 that doesn\u2019t exceed your or your spouse\u2019s low rate cap, you must go to ato.gov.au/taxreturninstructions 2024 and read question M2 to work out the taxed element, which is relevant for MLS purposes (Page 47).\n\nThe specific components that make up \"row (j)\" and \"row (k)\" are not provided in the given context.",
+      "retrieved_pages": [
+        42,
+        47,
+        46,
+        45
+      ],
+      "latency_s": 10.602,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-11",
+      "category": "medium",
+      "question": "How is the CGT discount applied differently to assets held for more than 12 months versus those held for less?",
+      "answer": "Based on the provided context, there is no information detailing how the CGT (Capital Gains Tax) discount is applied differently to assets held for more than 12 months versus those held for less.\n\nThe context mentions that \"Subsequent gains on the disposal of these ESS interests will be taxed under the capital gains tax rules\" (Page 21), but it does not elaborate on the mechanics or conditions of the CGT discount itself. It also discusses a \"tax concession\" for discounts on ESS interests in start-up companies (Page 21) and a potential $1,000 reduction for discounts received under 'taxed-upfront schemes' (Page 22), but these are specific to Employee Share Schemes and not the general CGT discount.",
+      "retrieved_pages": [
+        21,
+        21,
+        24,
+        22
+      ],
+      "latency_s": 5.337,
+      "metrics": {
+        "answer_accuracy": 0.667,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "MEDIUM-12",
+      "category": "medium",
+      "question": "What types of expenses qualify for the D10 deduction for the cost of managing tax affairs?",
+      "answer": "Based on the provided ATO context, the following types of expenses qualify for the D10 deduction for the cost of managing tax affairs:\n\n**Qualifying Expenses:**\n\n*   **Interest charges** imposed by the ATO.\n*   **Litigation costs**, which include:\n    *   Court and Administrative Appeals Tribunal fees.\n    *   Solicitor, barrister, and other legal costs incurred in managing your tax affairs.\n*   **Other expenses incurred in managing your tax affairs**, including:\n    *   Preparing and lodging your tax return and activity statements.\n    *   Fees paid to a recognised tax adviser for preparing and lodging your tax return.\n    *   Travel to obtain tax advice from a recognised tax adviser.\n    *   Buying tax reference material.\n    *   Dealing with the ATO about your tax affairs.\n*   Any costs incurred in complying with your legal obligations relating to another person\u2019s or other entity\u2019s tax affairs.\n\n**Expenses You Cannot Claim:**\n\n*   The cost of tax advice given by a person who is not a recognised tax adviser.\n*   A deduction for tax shortfall and other penalties for failing to meet your obligations.\n\nWhen completing your tax return, these costs are separated into three components:\n1.  Interest charged by the ATO (at label N)\n2.  Litigation costs (at label L)\n3.  Other expenses incurred in managing your tax affairs (at label M)\n\n(Page 33)",
+      "retrieved_pages": [
+        33,
+        33,
+        2,
+        31
+      ],
+      "latency_s": 5.536,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": null,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-02",
+      "category": "medium",
+      "question": "What is the Medicare levy rate expressed as a percentage of taxable income?",
+      "answer": "Australian residents for tax purposes are subject to a Medicare levy of **2%** of their taxable income, unless they qualify for a reduction or exemption (Page 41).",
+      "retrieved_pages": [
+        42,
+        41,
+        41,
+        46
+      ],
+      "latency_s": 2.332,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    },
+    {
+      "id": "HALL-06",
+      "category": "medium",
+      "question": "What penalty does the ATO impose for late lodgement of an individual tax return, and how is it calculated?",
+      "answer": "The ATO may apply a penalty for failure to lodge on time if your tax return is not lodged by the due date (Page 79).\n\nThe penalty is calculated as follows:\n*   **Rate:** Generally, one penalty unit is applied for every 28 days (or part thereof) that your tax return is overdue.\n*   **Maximum:** The penalty is capped at a maximum of 5 penalty units.\n\nThe ATO also notes that they generally do not apply penalties in isolated cases of late lodgment and consider individual circumstances when deciding what action to take (Page 79).",
+      "retrieved_pages": [
+        79,
+        79,
+        1,
+        79
+      ],
+      "latency_s": 37.328,
+      "metrics": {
+        "answer_accuracy": 1.0,
+        "retrieval_recall": 1.0,
+        "citation_faithfulness": 1.0,
+        "hallucination_penalty": null
+      },
+      "error": null
+    }
+  ]
+}
