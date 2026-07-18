@@ -95,7 +95,13 @@ failed IDs (comma-separated `--id`).
 
 ## Task 2 — Merge before deploy (Brian's decision, assist only)
 
-When Brian says merge:
+**✅ DONE 2026-07-18** — merged via PR #2 (`e4b6666`) on GitHub; verified
+master's chroma_db contains only the fixed segment. **Caveat:** the PR
+predates commit `b4c855c` (ground-truth verification, 2026-07-17), which is
+local-only — push the eval branch and open a follow-up PR to get it into
+master. Until then, master's eval cases lack the verified ground-truth pages.
+
+Original instructions kept for reference:
 
 ```bash
 git checkout master
