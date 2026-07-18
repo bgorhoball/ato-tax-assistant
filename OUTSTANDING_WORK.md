@@ -95,7 +95,13 @@ failed IDs (comma-separated `--id`).
 
 ## Task 2 — Merge before deploy (Brian's decision, assist only)
 
-When Brian says merge:
+**✅ DONE 2026-07-18** — merged via PR #2 (`e4b6666`) on GitHub; verified
+master's chroma_db contains only the fixed segment. **Caveat:** the PR
+predates commit `b4c855c` (ground-truth verification, 2026-07-17), which is
+local-only — push the eval branch and open a follow-up PR to get it into
+master. Until then, master's eval cases lack the verified ground-truth pages.
+
+Original instructions kept for reference:
 
 ```bash
 git checkout master
@@ -143,6 +149,22 @@ Spec-specific notes:
 ---
 
 ## Task 4 — Fill in eval ground-truth pages (no API quota needed)
+
+**⚠️ MOSTLY DONE 2026-07-17** — 22 of 33 evaluable cases now have verified
+`ground_truth_pages` (was 4). Retrieval-only recall against expanded GT:
+easy 1.000, medium 0.875, hard 1.000
+(`eval/results/2026-07-17-retrieval-groundtruth.json`).
+
+- **MEDIUM-05 recall=0 is a REAL retrieval near-miss, not a GT error** —
+  dense retrieval misses the p61 IT5 definition chunk. It is the first
+  concrete benchmark target for spec 02. Do not "fix" its GT.
+- 10 cases remain `# approx` because their content lives in the ATO
+  **supplementary** volume, which is not in the corpus (items 13–24 area:
+  EASY-05, MEDIUM-04/06/07/09/10/11, HARD-02/05/07). Filling them requires
+  either adding the supplement PDF to the corpus (scope decision for Brian)
+  or recalibrating those cases to expect honest partial answers.
+
+Original instructions kept for reference:
 
 Most medium/hard cases have `ground_truth_pages=[]`, so retrieval recall is
 not measured for them. To fill them in, search the chroma store directly
